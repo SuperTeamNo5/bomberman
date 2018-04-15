@@ -30,6 +30,14 @@ public class ImageDAO {
 	public static final String welcomeImage = "/images/welcome.gif";
 	public static final String backgroundHighScore = "/images/mainbackground5.jpg";
 	public static final String avatarImage = "/images/item/bomer1.gif";
-	
+	public static final String bomber_down = "/images/bomber_down.png";
+	public static final String bomber_left = "/images/bomber_left.png";
+	public static final String bomber_right = "/images/bomber_right.png";
+	public static final String bomber_up = "/images/bomber_up.png";
+	public static final String box1 = "/images/box1.png";
+	public static final String box2 = "/images/box2.png";
+	public static final String box11 = "/images/shawdow1.png";
+	public static final String box22 = "/images/shawdow2.png";
+	public static final String backround_game = "/images/background_Play.png";
 
 }
