@@ -36,7 +36,6 @@ public class MainViewController implements MouseListener, WindowListener {
 	}
 
 	// Method is use to close the game's window
-
 	public void closing() {
 		String[] buttons = { "Do it", "Never" };
 		ImageIcon icon = new ImageIcon(getClass().getResource("/images/cry1.gif"));
