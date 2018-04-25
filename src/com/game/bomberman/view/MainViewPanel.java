@@ -12,10 +12,10 @@ import javax.swing.JPanel;
 import DAO.ImageDAO;
 
 @SuppressWarnings("serial")
-public class PanelMainView extends JPanel {
+public class MainViewPanel extends JPanel {
 	private JLabel lblPlayer1, lblPlayer2, lblHighScore, lblOption, lblQuit, lblWelcome, lblAvatar;
 
-	public PanelMainView() {
+	public MainViewPanel() {
 		add(getButtonPlayer1());
 		add(getButtonPlayer2());
 		add(getButtonHighScore());

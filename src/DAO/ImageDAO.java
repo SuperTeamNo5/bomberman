@@ -24,12 +24,15 @@ public class ImageDAO {
 	public static final String optionIcon = "/images/button/option.png";
 	public static final String sbackIcon = "/images/button/sback.png";
 	public static final String backIcon = "/images/button/back.png";
+	public static final String sletgoIcon = "/images/button/sletgo.png";
+	public static final String letgoIconIcon = "/images/button/letgo.png";
 	public static final String soptionIcon = "/images/button/options.png";
 	public static final String quitIcon = "/images/button/quit.png";
 	public static final String squitIcon = "/images/button/quits.png";
 	public static final String welcomeImage = "/images/welcome.gif";
 	public static final String backgroundHighScore = "/images/mainbackground5.jpg";
 	public static final String avatarImage = "/images/item/bomer1.gif";
+	public static final String avatarkhokhoImage = "/images/item/khokho.png";
 	public static final String bomber_down = "/images/bomber_down.png";
 	public static final String bomber_left = "/images/bomber_left.png";
 	public static final String bomber_right = "/images/bomber_right.png";

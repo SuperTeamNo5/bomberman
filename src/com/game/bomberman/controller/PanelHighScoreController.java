@@ -16,19 +16,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import com.game.bomberman.view.PanelHighScore;
+import com.game.bomberman.view.HighScorePanel;
 
 import DAO.ImageDAO;
 import DAO.MusicDAO;
 import DAO.ScoreDAO;
 
 public class PanelHighScoreController implements MouseListener {
-	PanelHighScore guiHighScore;
+	HighScorePanel guiHighScore;
 	JFrame frame;
 	JPanel pnlView;
-	ScoreDAO scoreDAO;
 	MainViewController mainViewController;
-	MusicDAO musicDAO;
+	ScoreDAO scoreDAO;
 
 	private BufferedImage bufferImage;
 
@@ -36,7 +35,7 @@ public class PanelHighScoreController implements MouseListener {
 		this.frame = frame;
 		this.mainViewController = mainViewController;
 		scoreDAO = new ScoreDAO();
-		guiHighScore = new PanelHighScore();
+		guiHighScore = new HighScorePanel();
 	}
 
 	public void setEventProcessing() {

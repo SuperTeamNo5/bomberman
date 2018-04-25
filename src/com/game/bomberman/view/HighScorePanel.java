@@ -19,13 +19,12 @@ import com.game.bomberman.controller.PanelHighScoreController;
 import DAO.ImageDAO;
 
 @SuppressWarnings("serial")
-public class PanelHighScore extends JPanel {
+public class HighScorePanel extends JPanel {
 	private JPanel pnlHighScore, pnlView, pnlBtnBack;
 	private JLabel lblNumber, lblName, lblScore, lblBtnBack, lblTitle;
 	private BufferedImage imgIconBack;
-	PanelHighScoreController highScoreController;
 
-	public PanelHighScore() {
+	public HighScorePanel() {
 		add(pnlView());
 	}
 

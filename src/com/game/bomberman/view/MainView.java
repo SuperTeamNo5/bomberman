@@ -25,7 +25,7 @@ import DAO.ImageDAO;
  */
 @SuppressWarnings("serial")
 public class MainView extends JFrame{
-	private PanelMainView pnlView;
+	private MainViewPanel pnlView;
 	private BufferedImage myImage;
 	private Image newLoaderImage;
 	private MenuView menubar;
@@ -39,7 +39,7 @@ public class MainView extends JFrame{
 		try {
 			layerPane = new JLayeredPane();
 			menubar= new MenuView();
-			pnlView = new PanelMainView();
+			pnlView = new MainViewPanel();
 			view();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -94,11 +94,11 @@ public class MainView extends JFrame{
 		}
 	}
 
-	public PanelMainView getPnlView() {
+	public MainViewPanel getPnlView() {
 		return pnlView;
 	}
 
-	public void setPnlView(PanelMainView pnlView) {
+	public void setPnlView(MainViewPanel pnlView) {
 		this.pnlView = pnlView;
 	}
 
