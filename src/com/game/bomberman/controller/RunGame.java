@@ -15,12 +15,18 @@ public class RunGame {
 		Player player = new Player("Han", 0, new Characters("bongmo", "down", new Position(0, 0), new Bag(), 0, 0));
 
 		Map map = new MapLv1(player);
+		
+		map.getBar().remove(1);
+		map.getBar().remove(1);
+		map.getBar().remove(1);
+		map.getBar().remove(1);
+		map.getBar().remove(1);
 
-		Action act = new Action(player);
+		Action act = new Action(map);
 
 		ViewGame view = new ViewGame(map, act);
 
-		KeyBoard key = new KeyBoard(player.getCharacter());
+		KeyBoard key = new KeyBoard(map.getPlayer().getCharacter());
 
 		MainViewOfGame game = new MainViewOfGame(view);
 		game.startGame();

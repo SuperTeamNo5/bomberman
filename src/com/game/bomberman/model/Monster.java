@@ -3,12 +3,13 @@ package com.game.bomberman.model;
 public abstract class Monster {
 	protected String name;
 	protected Position position;
-	
+	protected String directional;
 
 	public Monster(String name, Position position) {
 		super();
 		this.name = name;
 		this.position = position;
+		this.directional = "down";
 	}
 
 	public String getName() {
@@ -25,6 +26,14 @@ public abstract class Monster {
 
 	public void setPosition(Position position) {
 		this.position = position;
+	}
+
+	public String getDirectional() {
+		return directional;
+	}
+
+	public void setDirectional(String directional) {
+		this.directional = directional;
 	}
 
 }

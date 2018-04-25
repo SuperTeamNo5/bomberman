@@ -1,5 +1,7 @@
 package com.game.bomberman.model;
 
+import java.awt.Rectangle;
+
 public class Characters {
 	private String name;
 	private String directional;
@@ -80,9 +82,47 @@ public class Characters {
 		Loot loot;
 		loot = new Boom("boom", 1);
 		getBag().add(loot);
-		loot = new Shoes("shoes", 1);
+		loot = new Shoes("shoes", 2);
 		getBag().add(loot);
 		loot = new Soda("soda", 1);
 		getBag().add(loot);
+	}
+
+	// chacracter move row
+	public void moveARow() {
+		if (getPosition().getxCoordinate() < 0) {
+			getPosition().setxCoordinate(0);
+			return;
+		}
+		if (getPosition().getxCoordinate() + 45 > 950) {
+			getPosition().setxCoordinate(950 - 45);
+			return;
+		}
+		getPosition().setxCoordinate(getPosition().getxCoordinate() + getSpeedRow());
+	}
+
+	// chacracter move column
+	public void moveAColumn() {
+		if (getPosition().getyCoordinate() < -10) {
+			getPosition().setyCoordinate(-10);
+			return;
+		}
+		if (getPosition().getyCoordinate() + 65 > 650) {
+			getPosition().setyCoordinate(650 - 65);
+			return;
+		}
+		getPosition().setyCoordinate(getPosition().getyCoordinate() + getSpeedColumn());
+	}
+
+	public Rectangle recPlayer() {
+		return new Rectangle(getPosition().getxCoordinate(), getPosition().getyCoordinate(), getWidth(), getHeight());
+	}
+
+	// test collision between player and something
+	public boolean collision(Rectangle rec1, Rectangle rec2) {
+		if (rec1.intersects(rec2)) {
+			return true;
+		}
+		return false;
 	}
 }

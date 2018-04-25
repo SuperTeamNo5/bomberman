@@ -37,10 +37,18 @@ public class ImageDAO {
 	public static final String bomber_left = "/images/bomber_left.png";
 	public static final String bomber_right = "/images/bomber_right.png";
 	public static final String bomber_up = "/images/bomber_up.png";
-	public static final String box1 = "/images/box1.png";
-	public static final String box2 = "/images/box2.png";
-	public static final String box11 = "/images/shawdow1.png";
-	public static final String box22 = "/images/shawdow2.png";
+	public static final String box1 = "/images/item/box1.png";
+	public static final String box2 = "/images/item/box2.png";
+	public static final String box11 = "/images/item/shawdow1.png";
+	public static final String box22 = "/images/item/shawdow2.png";
 	public static final String backround_game = "/images/background_Play.png";
+	public static final String monster_Down = "/images/item/monster_down.png";
+	public static final String monster_Left = "/images/item/monster_left.png";
+	public static final String monster_Right = "/images/item/monster_right.png";
+	public static final String monster_UP = "/images/item/monster_up.png";
+	public static final String bomb = "/images/item/bomb.png";
+	public static final String soda = "/images/item/item_bombsize.png";
+	public static final String shoes = "/images/item/item_shoe.png";
+	public static final String bomb_item = "/images/item/item_bomb.png";
 
 }

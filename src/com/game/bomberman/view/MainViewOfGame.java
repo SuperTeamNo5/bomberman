@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
-@SuppressWarnings("serial")
 public class MainViewOfGame extends JFrame {
 	ViewGame view;
 
