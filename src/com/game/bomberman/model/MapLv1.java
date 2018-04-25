@@ -9,7 +9,8 @@ public class MapLv1 extends Map {
 		super(player);
 		createMap();
 	}
-//method create map for class map
+
+	// method create map for class map
 	@Override
 	public void createMap() {
 		int x = 0;
@@ -40,7 +41,7 @@ public class MapLv1 extends Map {
 		// create position of player
 		// Player a = new Player("Han", 0, new Characters("bongmo", "down", new
 		// Position(0, 587), new Bag(), 1));
-		player.getCharacter().setPosition(new Position(0, 587));
+		getPlayer().getCharacter().setPosition(new Position(0, 587));
 		// Player z = new Player(new Position(0, 587));
 		// if (soNguoiChoi == 1) {
 		// man.add(a);
@@ -49,10 +50,12 @@ public class MapLv1 extends Map {
 		// man.add(z);
 		// }
 		// create position of loot
-		Loot boom = new Boom("bombItem", new Position(0, 150));
-		Loot boom1 = new Boom("bombsize", new Position(100, 150));
-		loot.add(boom);
+		Loot boom1 = new Boom("bombItem", new Position(0, 150));
+		Loot boom3 = new Shoes("shoes", new Position(0, 200));
+		Loot boom2 = new Soda("soda", new Position(0, 250));
 		loot.add(boom1);
+		loot.add(boom2);
+		loot.add(boom3);
 
 		// create position of monster
 		Monster monster3 = new NomalMonster("nomalMonster", new Position(0, 487));

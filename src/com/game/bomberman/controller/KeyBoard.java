@@ -49,19 +49,19 @@ public class KeyBoard implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_A:
-			charactes.setDirectional("down");
+//			charactes.setDirectional("down");
 			charactes.setSpeedRow(0);
 			break;
 		case KeyEvent.VK_S:
-			charactes.setDirectional("down");
+//			charactes.setDirectional("down");
 			charactes.setSpeedColumn(0);
 			break;
 		case KeyEvent.VK_D:
-			charactes.setDirectional("down");
+//			charactes.setDirectional("down");
 			charactes.setSpeedRow(0);
 			break;
 		case KeyEvent.VK_W:
-			charactes.setDirectional("down");
+//			charactes.setDirectional("down");
 			charactes.setSpeedColumn(0);
 			break;
 

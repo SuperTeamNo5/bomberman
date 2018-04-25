@@ -14,13 +14,14 @@ import com.game.bomberman.model.Map;
 
 import DAO.ImageDAO;
 
-@SuppressWarnings("serial")
 public class ViewGame extends JPanel implements Runnable {
 	private CharactersView viewMan;
 
 	private Action act;
 
 	private List<BarrierView> barView;
+	private List<MonsterView> monView;
+	private List<LootView> lootView;
 
 	private Map map;
 
@@ -32,17 +33,22 @@ public class ViewGame extends JPanel implements Runnable {
 		this.map = map;
 		this.viewMan = createViewMan();
 		this.barView = createBarrierView();
+		this.monView = createMonsterView();
+		this.lootView = createLootView();
 		this.act = act;
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		long begintime = System.nanoTime();
 		dislayBackroundGame(g);
-		// dislayBarrierViewDown(g);
+		displayLootView(g);
+		displayBarrierViewDown(g);
 		dislayViewMan(g);
-		dislayBarrierViewUp(g);
-		System.out.println("lap");
+		displayMonsterView(g);
+		displayBarrierViewUp(g);
+		System.out.println("Tgian: " + ((System.nanoTime() - begintime) / 1000000));
 	}
 
 	// display backround
@@ -66,18 +72,15 @@ public class ViewGame extends JPanel implements Runnable {
 		return new CharactersView(map.getPlayer().getCharacter());
 	}
 
-	// display barrier
-	public void dislayBarrierViewDown(Graphics g) {
-		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+	public void displayBarrierViewUp(Graphics g) {
 		for (int i = 0; i < barView.size(); i++) {
-			barView.get(i).imgDown(g);
+			barView.get(i).paint(g);
 		}
-		System.out.println(barView.size());
 	}
 
-	public void dislayBarrierViewUp(Graphics g) {
+	public void displayBarrierViewDown(Graphics g) {
 		for (int i = 0; i < barView.size(); i++) {
-			barView.get(i).imgUp(g);
+			barView.get(i).imgDown(g);
 		}
 	}
 
@@ -89,6 +92,38 @@ public class ViewGame extends JPanel implements Runnable {
 			arr.add(barrView);
 		}
 		return arr;
+	}
+
+	public List<MonsterView> createMonsterView() {
+		List<MonsterView> arr = new ArrayList<>();
+		MonsterView MonView;
+		for (int i = 0; i < map.getMons().size(); i++) {
+			MonView = new MonsterView(map.getMons().get(i));
+			arr.add(MonView);
+		}
+		return arr;
+	}
+
+	public void displayMonsterView(Graphics g) {
+		for (int i = 0; i < monView.size(); i++) {
+			monView.get(i).paint(g);
+		}
+	}
+
+	public List<LootView> createLootView() {
+		List<LootView> arr = new ArrayList<>();
+		LootView lootView;
+		for (int i = 0; i < map.getLoot().size(); i++) {
+			lootView = new LootView(map.getLoot().get(i));
+			arr.add(lootView);
+		}
+		return arr;
+	}
+
+	public void displayLootView(Graphics g) {
+		for (int i = 0; i < lootView.size(); i++) {
+			lootView.get(i).paint(g);
+		}
 	}
 
 	public void startGame() {
@@ -119,7 +154,7 @@ public class ViewGame extends JPanel implements Runnable {
 				// } else {
 				// Thread.sleep(period / 2000000);
 				// }
-				Thread.sleep(1);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				beginTime = System.nanoTime();
 			}
