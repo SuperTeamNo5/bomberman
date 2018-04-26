@@ -14,6 +14,7 @@ import com.game.bomberman.model.Map;
 
 import DAO.ImageDAO;
 
+@SuppressWarnings("serial")
 public class ViewGame extends JPanel implements Runnable {
 	private CharactersView viewMan;
 

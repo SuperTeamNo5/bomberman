@@ -74,6 +74,7 @@ public class MainView extends JFrame{
 			setJMenuBar(menubar);
 			// add panel main view
 			layerPane.add(getPnlView(),JLayeredPane.POPUP_LAYER);
+//			layerPane.add(getPnlView(),JLayeredPane.POPUP_LAYER);
 			// icon of application
 			Image imgAvatar1 = ImageIO.read(getClass().getResource(ImageDAO.boomIcon));
 			setIconImage(imgAvatar1);
