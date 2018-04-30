@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.game.bomberman.controller.Action;
+import com.game.bomberman.model.Loot;
 import com.game.bomberman.model.Map;
 
 import DAO.ImageDAO;
@@ -34,7 +35,7 @@ public class ViewGame extends JPanel implements Runnable {
 		this.viewMan = createViewMan();
 		this.barView = createBarrierView();
 		this.monView = createMonsterView();
-		this.lootView = createLootView();
+		this.lootView = createLootView(map.getLoot());
 		this.act = act;
 	}
 
@@ -45,8 +46,8 @@ public class ViewGame extends JPanel implements Runnable {
 		dislayBackroundGame(g);
 		displayLootView(g);
 		displayBarrierViewDown(g);
-		dislayViewMan(g);
 		displayMonsterView(g);
+		dislayViewMan(g);
 		displayBarrierViewUp(g);
 		System.out.println("Tgian: " + ((System.nanoTime() - begintime) / 1000000));
 	}
@@ -110,10 +111,10 @@ public class ViewGame extends JPanel implements Runnable {
 		}
 	}
 
-	public List<LootView> createLootView() {
+	public List<LootView> createLootView(List<Loot> loot) {
 		List<LootView> arr = new ArrayList<>();
 		LootView lootView;
-		for (int i = 0; i < map.getLoot().size(); i++) {
+		for (int i = 0; i < loot.size(); i++) {
 			lootView = new LootView(map.getLoot().get(i));
 			arr.add(lootView);
 		}
@@ -145,8 +146,14 @@ public class ViewGame extends JPanel implements Runnable {
 		while (isRunning) {
 			repaint();
 			act.updateChar();
+			setLootView(act.collisionPlayerVsLoot());
+			act.collisionPlayerVsMons();
+
 			long deltaTime = System.nanoTime() - beginTime;
 			sleepTime = period - deltaTime;
+//			if (act.charDead()) {
+//				break;
+//			}
 
 			try {
 				// if (sleepTime > 0) {
@@ -159,9 +166,42 @@ public class ViewGame extends JPanel implements Runnable {
 				beginTime = System.nanoTime();
 			}
 
-			System.out.println("xxx");
+//			System.out.println("xxx");
 
 		}
 
 	}
+
+	public CharactersView getViewMan() {
+		return viewMan;
+	}
+
+	public void setViewMan(CharactersView viewMan) {
+		this.viewMan = viewMan;
+	}
+
+	public List<BarrierView> getBarView() {
+		return barView;
+	}
+
+	public void setBarView(List<BarrierView> barView) {
+		this.barView = barView;
+	}
+
+	public List<MonsterView> getMonView() {
+		return monView;
+	}
+
+	public void setMonView(List<MonsterView> monView) {
+		this.monView = monView;
+	}
+
+	public List<LootView> getLootView() {
+		return lootView;
+	}
+
+	public void setLootView(List<Loot> loot) {
+		this.lootView = createLootView(loot);
+	}
+
 }

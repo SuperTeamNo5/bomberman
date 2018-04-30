@@ -15,7 +15,7 @@ public class RunGame {
 		Player player = new Player("Han", 0, new Characters("bongmo", "down", new Position(0, 0), new Bag(), 0, 0));
 
 		Map map = new MapLv1(player);
-		
+
 		map.getBar().remove(1);
 		map.getBar().remove(1);
 		map.getBar().remove(1);
@@ -26,11 +26,11 @@ public class RunGame {
 
 		ViewGame view = new ViewGame(map, act);
 
-		KeyBoard key = new KeyBoard(map.getPlayer().getCharacter());
+		KeyBoard key = new KeyBoard(map.getPlayer().getCharacter(), act);
 
 		MainViewOfGame game = new MainViewOfGame(view);
 		game.startGame();
 		game.setVisible(true);
 		game.addKeyListener(key);
-}
+	}
 }

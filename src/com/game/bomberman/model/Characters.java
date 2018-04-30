@@ -10,6 +10,7 @@ public class Characters {
 	private int speedRow, speedColumn;
 	private final int width = 45;
 	private final int height = 55;
+	private boolean dead;
 
 	public Characters(String name, String directional, Position position, Bag bag, int speedRow, int speedColumn) {
 		super();
@@ -19,6 +20,7 @@ public class Characters {
 		this.bag = bag;
 		this.speedRow = speedRow;
 		this.speedColumn = speedColumn;
+		this.dead = false;
 		defaultLootInBag();
 	}
 
@@ -80,7 +82,7 @@ public class Characters {
 
 	public void defaultLootInBag() {
 		Loot loot;
-		loot = new Boom("boom", 1);
+		loot = new Boom("bombItem", 1);
 		getBag().add(loot);
 		loot = new Shoes("shoes", 2);
 		getBag().add(loot);
@@ -120,9 +122,19 @@ public class Characters {
 
 	// test collision between player and something
 	public boolean collision(Rectangle rec1, Rectangle rec2) {
-		if (rec1.intersects(rec2)) {
-			return true;
-		}
-		return false;
+		return rec1.intersects(rec2);
+
+	}
+
+	public void dead() {
+		setDead(true);
+	}
+
+	public boolean isDead() {
+		return dead;
+	}
+
+	public void setDead(boolean dead) {
+		this.dead = dead;
 	}
 }

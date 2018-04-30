@@ -18,6 +18,7 @@ public class CharactersView extends JPanel {
 	private Characters characters;
 	private Image img;
 	private String name;
+	private boolean dead;
 
 	public CharactersView(Characters characters) {
 		super();
@@ -29,11 +30,17 @@ public class CharactersView extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		image(g);
-//		g.drawRect(characters.recPlayer().x, characters.recPlayer().y, characters.recPlayer().width,
-//				characters.recPlayer().height);
+		// g.drawRect(characters.recPlayer().x, characters.recPlayer().y,
+		// characters.recPlayer().width,
+		// characters.recPlayer().height);
 	}
 
 	public void image(Graphics g) {
+		dead = characters.isDead();
+		if (dead) {
+			CharDead(g);
+			return;
+		}
 		switch (name) {
 		case "bongmo":
 			try {
@@ -45,6 +52,7 @@ public class CharactersView extends JPanel {
 			break;
 
 		default:
+
 			break;
 		}
 	}
@@ -70,5 +78,11 @@ public class CharactersView extends JPanel {
 			g.drawImage(img, characters.getPosition().getxCoordinate(), characters.getPosition().getyCoordinate(),
 					characters.getWidth(), characters.getHeight(), null);
 		}
+	}
+
+	public void CharDead(Graphics g) {
+		img = new ImageIcon(getClass().getResource(ImageDAO.CharDead)).getImage();
+		g.drawImage(img, characters.getPosition().getxCoordinate(), characters.getPosition().getyCoordinate(),
+				characters.getWidth(), characters.getHeight(), null);
 	}
 }

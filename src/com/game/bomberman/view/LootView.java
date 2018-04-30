@@ -2,6 +2,7 @@ package com.game.bomberman.view;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -50,5 +51,9 @@ public class LootView extends JPanel {
 		default:
 			break;
 		}
+//		 Rectangle rec = new Rectangle(loot.getPositon().getxCoordinate() +
+//		 10, loot.getPositon().getyCoordinate() + 10,
+//		 30, 30);
+//		 g.drawRect(rec.x, rec.y, rec.width, rec.height);
 	}
 }
