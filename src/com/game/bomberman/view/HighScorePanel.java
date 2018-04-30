@@ -25,7 +25,7 @@ public class HighScorePanel extends JPanel {
 	private BufferedImage imgIconBack;
 
 	public HighScorePanel() {
-		add(pnlView());
+//		add(pnlView());
 	}
 
 	/*

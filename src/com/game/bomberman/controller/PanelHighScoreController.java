@@ -28,7 +28,6 @@ public class PanelHighScoreController implements MouseListener {
 	JPanel pnlView;
 	MainViewController mainViewController;
 	ScoreDAO scoreDAO;
-
 	private BufferedImage bufferImage;
 
 	public PanelHighScoreController(JFrame frame, MainViewController mainViewController) {
@@ -51,7 +50,7 @@ public class PanelHighScoreController implements MouseListener {
 			bufferImage = ImageIO.read(getClass().getResource(ImageDAO.backgroundHighScore));
 			Image newLoaderImage = bufferImage.getScaledInstance(780, 620, java.awt.Image.SCALE_SMOOTH);
 			frame.setContentPane(new JLabel(new ImageIcon(newLoaderImage)));
-			pnlView = guiHighScore.pnlView();
+			 pnlView = guiHighScore.pnlView();
 			frame.add(pnlView, BorderLayout.CENTER);
 			printHighScore();
 			setEventProcessing();

@@ -24,11 +24,13 @@ public class MainViewController implements MouseListener, WindowListener {
 	MainView mainView;
 	MenuViewController menuViewController;
 	PanelHighScoreController highScoreController;
+	OnePlayerController onePlayerController;
 
 	public MainViewController() {
-		waitController = new FrameWaitController();
+//		waitController = new FrameWaitController();
 		mainView = new MainView();
 		highScoreController = new PanelHighScoreController(mainView, this);
+		onePlayerController = new OnePlayerController(mainView, this);
 		setEventProcessing();
 		playSounds(MusicDAO.backgroundMusic, true);
 		menuViewController= new MenuViewController(mainView.getMenubar(),this);
@@ -88,7 +90,8 @@ public class MainViewController implements MouseListener, WindowListener {
 	public void mouseClicked(MouseEvent e) {
 		playSounds(MusicDAO.pressMusic, false);
 		if (e.getSource() == mainView.getPnlView().getLblPlayer1()) {
-			// setMainView(true);
+			 setMainView(false);
+			 onePlayerController.setUpView();
 
 		} else if (e.getSource() == mainView.getPnlView().getLblPlayer2()) {
 
