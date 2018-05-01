@@ -21,6 +21,7 @@ public class RunGame {
 		map.getBar().remove(1);
 		map.getBar().remove(1);
 		map.getBar().remove(1);
+		map.getBar().remove(1);
 
 		Action act = new Action(map);
 
