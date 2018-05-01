@@ -26,7 +26,7 @@ public class RunGame {
 
 		ViewGame view = new ViewGame(map, act);
 
-		KeyBoard key = new KeyBoard(map.getPlayer().getCharacter());
+		KeyBoard key = new KeyBoard(map.getPlayer().getCharacter(), act);
 
 		MainViewOfGame game = new MainViewOfGame(view);
 		game.startGame();
@@ -34,8 +34,11 @@ public class RunGame {
 		game.setLocationRelativeTo(null);
 		game.addKeyListener(key);
 	}
+<<<<<<< HEAD
 
 	public static void main(String[] args) {
 		new RunGame();
 	}
+=======
+>>>>>>> 1a3cc3c4cc61fef38252044d6c2a08a72f33a049
 }

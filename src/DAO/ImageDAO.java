@@ -56,5 +56,6 @@ public class ImageDAO {
 	public static final String soda = "/images/item/item_bombsize.png";
 	public static final String shoes = "/images/item/item_shoe.png";
 	public static final String bomb_item = "/images/item/item_bomb.png";
+	public static final String CharDead = "/images/ghost.png";
 
 }

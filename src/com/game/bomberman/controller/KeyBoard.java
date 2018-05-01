@@ -7,9 +7,11 @@ import com.game.bomberman.model.Characters;
 
 public class KeyBoard implements KeyListener {
 	Characters charactes;
+	Action act;
 
-	public KeyBoard(Characters charactes) {
+	public KeyBoard(Characters charactes, Action act) {
 		this.charactes = charactes;
+		this.act = act;
 	}
 
 	@Override
@@ -41,6 +43,10 @@ public class KeyBoard implements KeyListener {
 			charactes.setDirectional("up");
 			charactes.setSpeedRow(0);
 			charactes.setSpeedColumn(-x);
+			break;
+		case KeyEvent.VK_SPACE:
+			act.dropBomb();
+			System.out.println("dropbom");
 			break;
 
 		default:

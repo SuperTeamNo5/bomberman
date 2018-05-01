@@ -24,7 +24,7 @@ import DAO.ImageDAO;
  * Shika 3/20/2018
  */
 @SuppressWarnings("serial")
-public class MainView extends JFrame{
+public class MainView extends JFrame {
 	private MainViewPanel pnlView;
 	private BufferedImage myImage;
 	private Image newLoaderImage;
@@ -38,7 +38,7 @@ public class MainView extends JFrame{
 	public MainView() {
 		try {
 			layerPane = new JLayeredPane();
-			menubar= new MenuView();
+			menubar = new MenuView();
 			pnlView = new MainViewPanel();
 			view();
 		} catch (IOException e) {
@@ -50,31 +50,32 @@ public class MainView extends JFrame{
 	public void view() throws IOException {
 		try {
 			/*
-			 * Thuc hien phuong thuc o duoi se cho ra giao hien khac voi giao dien mac dinh
-			 * cua swing
+			 * Thuc hien phuong thuc o duoi se cho ra giao hien khac voi giao
+			 * dien mac dinh cua swing
 			 */
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			//change cursor icon 
+			// change cursor icon
 			Toolkit toolkit = Toolkit.getDefaultToolkit();
 			BufferedImage myImages = ImageIO.read(getClass().getResource(ImageDAO.cursorBasicIcon));
-			
-			Cursor cursor = toolkit.createCustomCursor(myImages , new Point(this.getX(), 
-			           this.getY()), "img");
-			setCursor (cursor);
-			//set layeredpane cho panel cua cac nut duoc popup
+
+			Cursor cursor = toolkit.createCustomCursor(myImages, new Point(this.getX(), this.getY()), "img");
+			setCursor(cursor);
+			// set layeredpane cho panel cua cac nut duoc popup
 			setLayeredPane(layerPane);
-			// Tạo hình nền
+			// Táº¡o hÃ¬nh ná»�n
 			myImage = ImageIO.read(getClass().getResource(ImageDAO.backgroundImage));
 			newLoaderImage = myImage.getScaledInstance(780, 620, java.awt.Image.SCALE_SMOOTH);
 			setContentPane(new JLabel(new ImageIcon(newLoaderImage)));
 			setLayout(new BorderLayout());
-			// Tạo Menubar
+			// Táº¡o Menubar
 			setTitle("Bomberman");
 			// Create the menu
 			setJMenuBar(menubar);
 			// add panel main view
-			layerPane.add(getPnlView(),JLayeredPane.POPUP_LAYER);
-//			layerPane.add(getPnlView(),JLayeredPane.POPUP_LAYER);
+
+			layerPane.add(getPnlView(), JLayeredPane.POPUP_LAYER);
+			layerPane.add(getPnlView(), JLayeredPane.POPUP_LAYER);
+			// layerPane.add(getPnlView(),JLayeredPane.POPUP_LAYER);
 			// icon of application
 			Image imgAvatar1 = ImageIO.read(getClass().getResource(ImageDAO.boomIcon));
 			setIconImage(imgAvatar1);
@@ -118,7 +119,5 @@ public class MainView extends JFrame{
 	public void setMenubar(MenuView menubar) {
 		this.menubar = menubar;
 	}
-	
-	
 
 }
