@@ -25,14 +25,6 @@ public class ViewGame extends JPanel implements Runnable {
 	private List<MonsterView> monView;
 	private List<LootView> lootView;
 
-	public List<LootView> getLootView() {
-		return lootView;
-	}
-
-	public void setLootView(List<LootView> lootView) {
-		this.lootView = lootView;
-	}
-
 	private Map map;
 
 	private Thread thread;
@@ -46,6 +38,7 @@ public class ViewGame extends JPanel implements Runnable {
 		this.monView = createMonsterView();
 		this.lootView = createLootView(map.getLoot());
 		this.act = act;
+		// setSize(550, 350);
 	}
 
 	@Override
@@ -66,7 +59,7 @@ public class ViewGame extends JPanel implements Runnable {
 		BufferedImage img;
 		try {
 			img = ImageIO.read(getClass().getResource(ImageDAO.backround_game));
-			g.drawImage(img, 0, 0, 950, 650, null);
+			g.drawImage(img, 0, 0, 950, 550, null);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

@@ -16,7 +16,7 @@ public class MapLv1 extends Map {
 		int x = 0;
 		int y = 50;
 		int xmax = 950;
-		int ymax = 650;
+		int ymax = 550;
 		int o = 1;
 		// create position
 		List<Position> positions = new ArrayList<>();
@@ -41,7 +41,7 @@ public class MapLv1 extends Map {
 		// create position of player
 		// Player a = new Player("Han", 0, new Characters("bongmo", "down", new
 		// Position(0, 587), new Bag(), 1));
-		getPlayer().getCharacter().setPosition(new Position(0, 587));
+		getPlayer().getCharacter().setPosition(new Position(0, 450));
 		// Player z = new Player(new Position(0, 587));
 		// if (soNguoiChoi == 1) {
 		// man.add(a);

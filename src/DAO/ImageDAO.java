@@ -52,7 +52,7 @@ public class ImageDAO {
 	public static final String monster_Left = "/images/item/monster_left.png";
 	public static final String monster_Right = "/images/item/monster_right.png";
 	public static final String monster_UP = "/images/item/monster_up.png";
-	public static final String bomb = "/images/item/boom1.gif";
+	public static final String bomb = "/images/item/boom1_1.gif";
 	public static final String soda = "/images/item/item_bombsize.png";
 	public static final String shoes = "/images/item/item_shoe.png";
 	public static final String bomb_item = "/images/item/item_bomb.png";
