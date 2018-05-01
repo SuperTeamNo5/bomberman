@@ -74,7 +74,7 @@ public class MainView extends JFrame {
 			// add panel main view
 
 			layerPane.add(getPnlView(), JLayeredPane.POPUP_LAYER);
-			layerPane.add(getPnlView(), JLayeredPane.POPUP_LAYER);
+//			layerPane.add(getPnlView(), JLayeredPane.POPUP_LAYER);
 			// layerPane.add(getPnlView(),JLayeredPane.POPUP_LAYER);
 			// icon of application
 			Image imgAvatar1 = ImageIO.read(getClass().getResource(ImageDAO.boomIcon));
@@ -83,7 +83,7 @@ public class MainView extends JFrame {
 			setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 			setSize(new Dimension(780, 620));
 			setLocationRelativeTo(null);// Location default is middle
-			setResizable(false);// None resizable a window
+//			setResizable(false);// None resizable a window
 			setVisible(true);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

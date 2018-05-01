@@ -34,11 +34,9 @@ public class RunGame {
 		game.setLocationRelativeTo(null);
 		game.addKeyListener(key);
 	}
-<<<<<<< HEAD
 
 	public static void main(String[] args) {
 		new RunGame();
 	}
-=======
->>>>>>> 1a3cc3c4cc61fef38252044d6c2a08a72f33a049
+
 }
