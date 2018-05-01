@@ -20,4 +20,8 @@ public class Boom extends Loot {
 		return deadLine;
 	}
 
+	public void setDeadLine(int deadLine) {
+		this.deadLine = deadLine;
+	}
+
 }

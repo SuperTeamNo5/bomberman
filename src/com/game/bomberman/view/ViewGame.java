@@ -149,12 +149,13 @@ public class ViewGame extends JPanel implements Runnable {
 			act.updateChar();
 			setLootView(act.collisionPlayerVsLoot());
 			act.collisionPlayerVsMons();
+			act.updateMap();
 
 			long deltaTime = System.nanoTime() - beginTime;
 			sleepTime = period - deltaTime;
-//			if (act.charDead()) {
-//				break;
-//			}
+			// if (act.charDead()) {
+			// break;
+			// }
 
 			try {
 				// if (sleepTime > 0) {
@@ -167,7 +168,7 @@ public class ViewGame extends JPanel implements Runnable {
 				beginTime = System.nanoTime();
 			}
 
-//			System.out.println("xxx");
+			// System.out.println("xxx");
 
 		}
 
