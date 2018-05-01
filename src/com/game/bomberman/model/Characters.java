@@ -109,8 +109,8 @@ public class Characters {
 			getPosition().setyCoordinate(-10);
 			return;
 		}
-		if (getPosition().getyCoordinate() + 65 > 650) {
-			getPosition().setyCoordinate(650 - 65);
+		if (getPosition().getyCoordinate() + 65 > 660) {
+			getPosition().setyCoordinate(660 - 65);
 			return;
 		}
 		getPosition().setyCoordinate(getPosition().getyCoordinate() + getSpeedColumn());

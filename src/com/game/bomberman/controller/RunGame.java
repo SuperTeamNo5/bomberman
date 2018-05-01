@@ -21,6 +21,7 @@ public class RunGame {
 		map.getBar().remove(1);
 		map.getBar().remove(1);
 		map.getBar().remove(1);
+		map.getBar().remove(1);
 
 		Action act = new Action(map);
 
@@ -38,5 +39,8 @@ public class RunGame {
 	public static void main(String[] args) {
 		new RunGame();
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> fcc9d4c1956399730fe6f6008007d8416a91863d
 }

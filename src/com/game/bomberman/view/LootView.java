@@ -51,9 +51,9 @@ public class LootView extends JPanel {
 		default:
 			break;
 		}
-//		 Rectangle rec = new Rectangle(loot.getPositon().getxCoordinate() +
-//		 10, loot.getPositon().getyCoordinate() + 10,
-//		 30, 30);
-//		 g.drawRect(rec.x, rec.y, rec.width, rec.height);
+		// Rectangle rec = new Rectangle(loot.getPositon().getxCoordinate() +
+		// 10, loot.getPositon().getyCoordinate() + 10,
+		// 30, 30);
+		// g.drawRect(rec.x, rec.y, rec.width, rec.height);
 	}
 }

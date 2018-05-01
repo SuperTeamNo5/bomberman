@@ -31,6 +31,7 @@ public class Action {
 		this.mons = map.getMons();
 	}
 
+	// test man dead
 	public boolean charDead() {
 		return player.getCharacter().isDead();
 	}
@@ -49,6 +50,7 @@ public class Action {
 		// System.out.println(player.getCharacter().getSpeedColumn());
 	}
 
+	// update char after collision
 	public void updateCharAfterCollision() {
 		Rectangle rec1 = player.getCharacter().recPlayer();
 		Rectangle rec2 = collisionPlayerAndBar();
@@ -75,6 +77,7 @@ public class Action {
 		// }
 	}
 
+	// test collision with bar
 	public Rectangle collisionPlayerAndBar() {
 		Rectangle rec1 = player.getCharacter().recPlayer();
 		Rectangle rec2;
@@ -89,18 +92,23 @@ public class Action {
 		return null;
 	}
 
+	// dat bomb
 	public void dropBomb() {
 		Characters chara = player.getCharacter();
 		int x = chara.getPosition().getxCoordinate() + chara.getWidth() / 2;
 		int y = chara.getPosition().getyCoordinate() + chara.getHeight() / 2;
 		// int x = chara.getPosition().getxCoordinate();
 		// int y = chara.getPosition().getyCoordinate();
-		Loot bomb = new Boom("bomb", new Position((x / 45) * 45, (y / 50) * 50), 3000);
-		loot.add(bomb);
+		if (chara.getBag().search("bombItem").getQuatity() > 0) {
+			Loot bomb = new Boom("bomb", new Position((x / 50) * 50, (y / 50) * 50), 500);
+			loot.add(bomb);
+			chara.getBag().search("bombItem").setQuatity(chara.getBag().search("bombItem").getQuatity() - 1);
+		}
 		// map.setLoot(loot);
 
 	}
 
+	// collision with loot and pick up items
 	public List<Loot> collisionPlayerVsLoot() {
 		Rectangle rec1 = player.getCharacter().recPlayer();
 		Rectangle rec2;
@@ -125,6 +133,7 @@ public class Action {
 		return loot;
 	}
 
+	// collision with monster
 	public void collisionPlayerVsMons() {
 		Rectangle rec1 = player.getCharacter().recPlayer();
 		Rectangle rec2;
@@ -138,6 +147,28 @@ public class Action {
 
 			}
 		}
+	}
+
+	public void updateMap() {
+		Boom lo;
+		Characters chara = player.getCharacter();
+		for (int i = 0; i < loot.size(); i++) {
+			if (loot.get(i).getName().equalsIgnoreCase("bomb")) {
+				lo = (Boom) loot.get(i);
+				if (boomBang(lo) == true) {
+					loot.remove(i);
+					chara.getBag().search("bombItem").setQuatity(chara.getBag().search("bombItem").getQuatity() + 1);
+				}
+			}
+		}
+	}
+
+	public boolean boomBang(Boom bomb) {
+		bomb.setDeadLine(bomb.getDeadLine() - 1);
+		if (bomb.getDeadLine() == 0) {
+			return true;
+		}
+		return false;
 	}
 
 }

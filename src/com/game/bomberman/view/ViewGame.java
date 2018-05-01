@@ -25,7 +25,10 @@ public class ViewGame extends JPanel implements Runnable {
 	private List<MonsterView> monView;
 	private List<LootView> lootView;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fcc9d4c1956399730fe6f6008007d8416a91863d
 	private Map map;
 
 	private Thread thread;
@@ -39,6 +42,7 @@ public class ViewGame extends JPanel implements Runnable {
 		this.monView = createMonsterView();
 		this.lootView = createLootView(map.getLoot());
 		this.act = act;
+		// setSize(550, 350);
 	}
 
 	@Override
@@ -72,6 +76,7 @@ public class ViewGame extends JPanel implements Runnable {
 	}
 
 	public CharactersView createViewMan() {
+		System.out.println("y: "+map.getPlayer().getCharacter().getPosition().getyCoordinate());
 		return new CharactersView(map.getPlayer().getCharacter());
 	}
 
@@ -150,12 +155,14 @@ public class ViewGame extends JPanel implements Runnable {
 			act.updateChar();
 			setLootView(act.collisionPlayerVsLoot());
 			act.collisionPlayerVsMons();
+			act.updateMap();
+			
 
 			long deltaTime = System.nanoTime() - beginTime;
 			sleepTime = period - deltaTime;
-//			if (act.charDead()) {
-//				break;
-//			}
+			// if (act.charDead()) {
+			// break;
+			// }
 
 			try {
 				// if (sleepTime > 0) {
@@ -168,7 +175,7 @@ public class ViewGame extends JPanel implements Runnable {
 				beginTime = System.nanoTime();
 			}
 
-//			System.out.println("xxx");
+			// System.out.println("xxx");
 
 		}
 
