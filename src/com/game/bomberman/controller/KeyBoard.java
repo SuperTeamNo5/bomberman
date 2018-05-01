@@ -22,22 +22,22 @@ public class KeyBoard implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int x = charactes.getBag().search("shoes").getQuatity();
 		switch (e.getKeyCode()) {
-		case KeyEvent.VK_A:
+		case KeyEvent.VK_LEFT:
 			charactes.setDirectional("left");
 			charactes.setSpeedRow(-x);
 			charactes.setSpeedColumn(0);
 			break;
-		case KeyEvent.VK_S:
+		case KeyEvent.VK_DOWN:
 			charactes.setDirectional("down");
 			charactes.setSpeedColumn(x);
 			charactes.setSpeedRow(0);
 			break;
-		case KeyEvent.VK_D:
+		case KeyEvent.VK_RIGHT:
 			charactes.setDirectional("right");
 			charactes.setSpeedRow(x);
 			charactes.setSpeedColumn(0);
 			break;
-		case KeyEvent.VK_W:
+		case KeyEvent.VK_UP:
 			charactes.setDirectional("up");
 			charactes.setSpeedRow(0);
 			charactes.setSpeedColumn(-x);
@@ -52,19 +52,19 @@ public class KeyBoard implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
-		case KeyEvent.VK_A:
+		case KeyEvent.VK_LEFT:
 			// charactes.setDirectional("down");
 			charactes.setSpeedRow(0);
 			break;
-		case KeyEvent.VK_S:
+		case KeyEvent.VK_DOWN:
 			// charactes.setDirectional("down");
 			charactes.setSpeedColumn(0);
 			break;
-		case KeyEvent.VK_D:
+		case KeyEvent.VK_RIGHT:
 			// charactes.setDirectional("down");
 			charactes.setSpeedRow(0);
 			break;
-		case KeyEvent.VK_W:
+		case KeyEvent.VK_UP:
 			// charactes.setDirectional("down");
 			charactes.setSpeedColumn(0);
 			break;

@@ -24,6 +24,7 @@ public class OnePlayerController implements MouseListener {
 	JPanel pnlView;
 	MainViewController mainViewController;
 	private BufferedImage bufferImage;
+	RunGame gameView;
 
 	public OnePlayerController(JFrame frame, MainViewController mainViewController) {
 		this.frame = frame;
@@ -72,10 +73,10 @@ public class OnePlayerController implements MouseListener {
 			mainViewController.setMainView(true);
 			frame.repaint();
 		} else if (e.getSource() == playerPanel.getLblBtnGo()) {
-			pnlView.setVisible(false);
 			mainViewController.playSounds(MusicDAO.pressMusic, false);
-			// mainViewController.setMainView(true);
-			frame.repaint();
+			frame.setVisible(false);
+			gameView = new RunGame();
+//			frame.repaint();
 		}
 	}
 

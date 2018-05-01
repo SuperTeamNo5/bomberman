@@ -27,7 +27,7 @@ public class MainViewController implements MouseListener, WindowListener {
 	OnePlayerController onePlayerController;
 
 	public MainViewController() {
-//		waitController = new FrameWaitController();
+		waitController = new FrameWaitController();
 		mainView = new MainView();
 		highScoreController = new PanelHighScoreController(mainView, this);
 		onePlayerController = new OnePlayerController(mainView, this);

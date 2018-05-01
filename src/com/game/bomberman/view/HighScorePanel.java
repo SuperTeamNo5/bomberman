@@ -53,7 +53,7 @@ public class HighScorePanel extends JPanel {
 		pnlView.add(pnlHighScore, BorderLayout.CENTER);
 		pnlView.add(pnlBtnBack, BorderLayout.SOUTH);
 
-		pnlHighScore.setBackground(new Color(90, 90, 90, 150));
+		pnlHighScore.setBackground(new Color(90, 90, 90, 100));
 		pnlBtnBack.setOpaque(false);
 		pnlView.setBackground(new Color(255, 255, 255, 10));
 		pnlView.setBounds(75, 60, 630, 450);
