@@ -25,13 +25,6 @@ public class ViewGame extends JPanel implements Runnable {
 	private List<MonsterView> monView;
 	private List<LootView> lootView;
 
-	public List<LootView> getLootView() {
-		return lootView;
-	}
-
-	public void setLootView(List<LootView> lootView) {
-		this.lootView = lootView;
-	}
 
 	private Map map;
 
@@ -212,5 +205,14 @@ public class ViewGame extends JPanel implements Runnable {
 	public void setLootView(List<Loot> loot) {
 		this.lootView = createLootView(loot);
 	}
+	
+	public List<LootView> getLootView() {
+		return lootView;
+	}
+
+	public void setLootView(List<LootView> lootView) {
+		this.lootView = lootView;
+	}
+
 
 }
