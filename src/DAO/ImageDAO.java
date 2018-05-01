@@ -33,7 +33,7 @@ public class ImageDAO {
 	//background
 	public static final String backgroundImage = "/images/background.png";
 	public static final String backgroundLoader = "/images/backgroundload.png";
-	public static final String backgroundHighScore = "/images/mainbackground5.jpg";
+	public static final String backgroundHighScore = "/images/mainbackground7.jpg";
 	public static final String backgroundOnePlayer = "/images/mainbackground6.png";
 	public static final String backround_game = "/images/background_Play.png";
 	//item

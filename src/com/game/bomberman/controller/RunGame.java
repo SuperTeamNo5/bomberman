@@ -10,8 +10,8 @@ import com.game.bomberman.view.MainViewOfGame;
 import com.game.bomberman.view.ViewGame;
 
 public class RunGame {
-	public static void main(String[] args) {
 
+	public RunGame() {
 		Player player = new Player("Han", 0, new Characters("bongmo", "down", new Position(0, 0), new Bag(), 0, 0));
 
 		Map map = new MapLv1(player);
@@ -31,6 +31,14 @@ public class RunGame {
 		MainViewOfGame game = new MainViewOfGame(view);
 		game.startGame();
 		game.setVisible(true);
+		game.setLocationRelativeTo(null);
 		game.addKeyListener(key);
 	}
+<<<<<<< HEAD
+
+	public static void main(String[] args) {
+		new RunGame();
+	}
+=======
+>>>>>>> 1a3cc3c4cc61fef38252044d6c2a08a72f33a049
 }

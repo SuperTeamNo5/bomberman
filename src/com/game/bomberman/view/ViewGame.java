@@ -25,6 +25,14 @@ public class ViewGame extends JPanel implements Runnable {
 	private List<MonsterView> monView;
 	private List<LootView> lootView;
 
+	public List<LootView> getLootView() {
+		return lootView;
+	}
+
+	public void setLootView(List<LootView> lootView) {
+		this.lootView = lootView;
+	}
+
 	private Map map;
 
 	private Thread thread;
