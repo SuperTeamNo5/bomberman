@@ -18,7 +18,7 @@ public class MainViewOfGame extends JFrame {
 	public MainViewOfGame(ViewGame view) {
 		super();
 		this.view = view;
-		setSize(966, 678);
+		setSize(966, 750);
 		setLayout(new BorderLayout());
 		setTitle("Demo Bomer man");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

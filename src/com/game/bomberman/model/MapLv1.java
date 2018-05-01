@@ -16,7 +16,7 @@ public class MapLv1 extends Map {
 		int x = 0;
 		int y = 50;
 		int xmax = 950;
-		int ymax = 550;
+		int ymax = 650;
 		int o = 1;
 		// create position
 		List<Position> positions = new ArrayList<>();
@@ -41,7 +41,7 @@ public class MapLv1 extends Map {
 		// create position of player
 		// Player a = new Player("Han", 0, new Characters("bongmo", "down", new
 		// Position(0, 587), new Bag(), 1));
-		getPlayer().getCharacter().setPosition(new Position(0, 450));
+		getPlayer().getCharacter().setPosition(new Position(0, 595));
 		// Player z = new Player(new Position(0, 587));
 		// if (soNguoiChoi == 1) {
 		// man.add(a);
@@ -58,7 +58,7 @@ public class MapLv1 extends Map {
 		loot.add(boom3);
 
 		// create position of monster
-		Monster monster3 = new NomalMonster("nomalMonster", new Position(0, 487));
+		Monster monster3 = new NomalMonster("nomalMonster", new Position(100, 487));
 		Monster monster1 = new NomalMonster("nomalMonster", new Position(0, 87));
 		Monster monster2 = new NomalMonster("nomalMonster", new Position(187, 187));
 		Monster monster4 = new NomalMonster("nomalMonster", new Position(450, 387));

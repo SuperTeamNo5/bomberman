@@ -59,7 +59,7 @@ public class ViewGame extends JPanel implements Runnable {
 		BufferedImage img;
 		try {
 			img = ImageIO.read(getClass().getResource(ImageDAO.backround_game));
-			g.drawImage(img, 0, 0, 950, 550, null);
+			g.drawImage(img, 0, 0, 950, 650, null);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -72,6 +72,7 @@ public class ViewGame extends JPanel implements Runnable {
 	}
 
 	public CharactersView createViewMan() {
+		System.out.println("y: "+map.getPlayer().getCharacter().getPosition().getyCoordinate());
 		return new CharactersView(map.getPlayer().getCharacter());
 	}
 
@@ -151,6 +152,7 @@ public class ViewGame extends JPanel implements Runnable {
 			setLootView(act.collisionPlayerVsLoot());
 			act.collisionPlayerVsMons();
 			act.updateMap();
+			
 
 			long deltaTime = System.nanoTime() - beginTime;
 			sleepTime = period - deltaTime;
