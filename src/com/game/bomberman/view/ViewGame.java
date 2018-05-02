@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.game.bomberman.controller.Action;
+import com.game.bomberman.controller.MonsAction;
 import com.game.bomberman.model.Loot;
 import com.game.bomberman.model.Map;
 
@@ -20,6 +21,7 @@ public class ViewGame extends JPanel implements Runnable {
 	private CharactersView viewMan;
 
 	private Action act;
+	private MonsAction monsAct;
 
 	private List<BarrierView> barView;
 	private List<MonsterView> monView;
@@ -31,13 +33,14 @@ public class ViewGame extends JPanel implements Runnable {
 
 	private boolean isRunning = false;
 
-	public ViewGame(Map map, Action act) {
+	public ViewGame(Map map, Action act, MonsAction monsAct) {
 		this.map = map;
 		this.viewMan = createViewMan();
 		this.barView = createBarrierView();
 		this.monView = createMonsterView();
 		this.lootView = createLootView(map.getLoot());
 		this.act = act;
+		this.monsAct = monsAct;
 		// setSize(550, 350);
 	}
 
@@ -72,7 +75,7 @@ public class ViewGame extends JPanel implements Runnable {
 	}
 
 	public CharactersView createViewMan() {
-		System.out.println("y: "+map.getPlayer().getCharacter().getPosition().getyCoordinate());
+		System.out.println("y: " + map.getPlayer().getCharacter().getPosition().getyCoordinate());
 		return new CharactersView(map.getPlayer().getCharacter());
 	}
 
@@ -152,13 +155,13 @@ public class ViewGame extends JPanel implements Runnable {
 			setLootView(act.collisionPlayerVsLoot());
 			act.collisionPlayerVsMons();
 			act.updateMap();
-			
+			monsAct.updateMons();
 
 			long deltaTime = System.nanoTime() - beginTime;
 			sleepTime = period - deltaTime;
-			// if (act.charDead()) {
-			// break;
-			// }
+			 if (act.charDead()) {
+			 break;
+			 }
 
 			try {
 				// if (sleepTime > 0) {
