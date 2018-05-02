@@ -83,7 +83,7 @@ public class MainView extends JFrame {
 			setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 			setSize(new Dimension(780, 620));
 			setLocationRelativeTo(null);// Location default is middle
-			setResizable(false);// None resizable a window
+//			setResizable(false);// None resizable a window
 			setVisible(true);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
