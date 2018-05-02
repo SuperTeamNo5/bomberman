@@ -81,7 +81,7 @@ public class CharactersView extends JPanel {
 	}
 
 	public void CharDead(Graphics g) {
-		img = new ImageIcon(getClass().getResource(ImageDAO.CharDead)).getImage();
+		img = new ImageIcon(getClass().getResource(ImageDAO.charDead)).getImage();
 		g.drawImage(img, characters.getPosition().getxCoordinate(), characters.getPosition().getyCoordinate(),
 				characters.getWidth(), characters.getHeight(), null);
 	}

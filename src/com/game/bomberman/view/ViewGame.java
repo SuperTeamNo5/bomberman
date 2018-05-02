@@ -25,10 +25,6 @@ public class ViewGame extends JPanel implements Runnable {
 	private List<MonsterView> monView;
 	private List<LootView> lootView;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> fcc9d4c1956399730fe6f6008007d8416a91863d
 	private Map map;
 
 	private Thread thread;
@@ -213,13 +209,13 @@ public class ViewGame extends JPanel implements Runnable {
 		this.lootView = createLootView(loot);
 	}
 	
-	public List<LootView> getLootView() {
-		return lootView;
-	}
-
-	public void setLootView(List<LootView> lootView) {
-		this.lootView = lootView;
-	}
+//	public List<LootView> getLootView() {
+//		return lootView;
+//	}
+//
+//	public void setLootView(List<LootView> lootView) {
+//		this.lootView = lootView;
+//	}
 
 
 }

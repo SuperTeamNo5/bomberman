@@ -25,22 +25,24 @@ public class MainViewController implements MouseListener, WindowListener {
 	MenuViewController menuViewController;
 	PanelHighScoreController highScoreController;
 	OnePlayerController onePlayerController;
+	OptionsController twoPlayersController;
 
 	public MainViewController() {
-		waitController = new FrameWaitController();
+//		waitController = new FrameWaitController();
 		mainView = new MainView();
 		highScoreController = new PanelHighScoreController(mainView, this);
 		onePlayerController = new OnePlayerController(mainView, this);
+		twoPlayersController = new OptionsController(mainView, this);
 		setEventProcessing();
 		playSounds(MusicDAO.backgroundMusic, true);
-		menuViewController= new MenuViewController(mainView.getMenubar(),this);
+		menuViewController = new MenuViewController(mainView.getMenubar(), this);
 
 	}
 
 	// Method is use to close the game's window
 	public void closing() {
 		String[] buttons = { "Do it", "Never" };
-		ImageIcon icon = new ImageIcon(getClass().getResource("/images/cry1.gif"));
+		ImageIcon icon = new ImageIcon(getClass().getResource(ImageDAO.outGameImage));
 
 		int quit = JOptionPane.showOptionDialog(null, "Close, because lose right?", "Close Bomberman ",
 				JOptionPane.INFORMATION_MESSAGE, 0, icon, buttons, null);
@@ -90,8 +92,8 @@ public class MainViewController implements MouseListener, WindowListener {
 	public void mouseClicked(MouseEvent e) {
 		playSounds(MusicDAO.pressMusic, false);
 		if (e.getSource() == mainView.getPnlView().getLblPlayer1()) {
-			 setMainView(false);
-			 onePlayerController.setUpView();
+			setMainView(false);
+			onePlayerController.setUpView();
 
 		} else if (e.getSource() == mainView.getPnlView().getLblPlayer2()) {
 
@@ -100,6 +102,8 @@ public class MainViewController implements MouseListener, WindowListener {
 			highScoreController.setUpView();
 
 		} else if (e.getSource() == mainView.getPnlView().getLblOption()) {
+			setMainView(false);
+			twoPlayersController.setUpView();
 
 		} else if (e.getSource() == mainView.getPnlView().getLblQuit()) {
 			closing();
