@@ -24,8 +24,9 @@ public class RunGame {
 		map.getBar().remove(1);
 
 		Action act = new Action(map);
+		MonsAction monsAct = new MonsAction(map);
 
-		ViewGame view = new ViewGame(map, act);
+		ViewGame view = new ViewGame(map, act, monsAct);
 
 		KeyBoard key = new KeyBoard(map.getPlayer().getCharacter(), act);
 

@@ -2,7 +2,7 @@ package com.game.bomberman.model;
 
 import java.awt.Rectangle;
 
-public class Characters {
+public class Characters implements Move {
 	private String name;
 	private String directional;
 	private Position position;

@@ -80,7 +80,7 @@ public class Action {
 	// test collision with bar
 	public Rectangle collisionPlayerAndBar() {
 		Rectangle rec1 = player.getCharacter().recPlayer();
-		Rectangle rec2;
+		Rectangle rec2, rec3;
 		for (int i = 0; i < bar.size(); i++) {
 			rec2 = new Rectangle(bar.get(i).getPosition().getxCoordinate(), bar.get(i).getPosition().getyCoordinate(),
 					bar.get(i).getWidth(), bar.get(i).getHeight() - 30);
@@ -115,7 +115,7 @@ public class Action {
 		// dropBomb();
 		for (int i = 0; i < loot.size(); i++) {
 			if (loot.get(i).getName().equalsIgnoreCase("bomb")) {
-
+				
 			} else {
 				rec2 = new Rectangle(loot.get(i).getPositon().getxCoordinate() + 10,
 						loot.get(i).getPositon().getyCoordinate() + 10, 30, 30);

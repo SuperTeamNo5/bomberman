@@ -1,5 +1,9 @@
 package com.game.bomberman.model;
 
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Monster {
 	protected String name;
 	protected Position position;
@@ -34,6 +38,20 @@ public abstract class Monster {
 
 	public void setDirectional(String directional) {
 		this.directional = directional;
+	}
+
+	public boolean checkNomalMons(Monster mon) {
+		Monster mo;
+		try {
+			mo = (NomalMonster) mon;
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean collision(Rectangle rec1, Rectangle rec2) {
+		return rec1.intersects(rec2);
 	}
 
 }
