@@ -25,10 +25,12 @@ public class OnePlayerController implements MouseListener {
 	MainViewController mainViewController;
 	private BufferedImage bufferImage;
 	RunGame gameView;
+	MusicDAO musicDAO;
 
-	public OnePlayerController(JFrame frame, MainViewController mainViewController) {
+	public OnePlayerController(JFrame frame, MainViewController mainViewController, MusicDAO musicDAO) {
 		this.frame = frame;
 		this.mainViewController = mainViewController;
+		this.musicDAO = musicDAO;
 		playerPanel = new OnePlayerPanel();
 	}
 
@@ -67,28 +69,28 @@ public class OnePlayerController implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		musicDAO.getListMusic().get(1).playSound(false);
 		if (e.getSource() == playerPanel.getLblBtnBack()) {
 			pnlView.setVisible(false);
-			mainViewController.playSounds(MusicDAO.pressMusic, false);
 			mainViewController.setMainView(true);
 			frame.repaint();
 		} else if (e.getSource() == playerPanel.getLblBtnGo()) {
-			mainViewController.playSounds(MusicDAO.pressMusic, false);
+			musicDAO.getListMusic().get(2).stopSound();
+			musicDAO.getListMusic().get(3).playSound(true);
 			frame.setVisible(false);
 			gameView = new RunGame();
-//			frame.repaint();
+			// frame.repaint();
 		}
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		musicDAO.getListMusic().get(0).playSound(false);
 		if (e.getSource() == playerPanel.getLblBtnBack()) {
 			setAttributeOfLabel(ImageDAO.sbackIcon, playerPanel.getLblBtnBack());
-			mainViewController.playSounds(MusicDAO.enteredMusic, false);
 			frame.repaint();
 		} else if (e.getSource() == playerPanel.getLblBtnGo()) {
 			setAttributeOfLabel(ImageDAO.sletgoIcon, playerPanel.getLblBtnGo());
-			mainViewController.playSounds(MusicDAO.enteredMusic, false);
 			frame.repaint();
 		}
 	}

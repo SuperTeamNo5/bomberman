@@ -1,6 +1,5 @@
 package com.game.bomberman.controller;
 
-import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,22 +12,25 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.game.bomberman.view.OnePlayerPanel;
 import com.game.bomberman.view.OptionPanel;
 
 import DAO.ImageDAO;
 import DAO.MusicDAO;
 
 public class OptionsController implements MouseListener {
+	static int counta, countb;
+	private BufferedImage bufferImage;
+	private BufferedImage imgBtnOn, imgBtnOff;
 	OptionPanel optionPanel;
 	JFrame frame;
 	JPanel pnlView;
 	MainViewController mainViewController;
-	private BufferedImage bufferImage;
+	MusicDAO musicDAO;
 
-	public OptionsController(JFrame frame, MainViewController mainViewController) {
+	public OptionsController(JFrame frame, MainViewController mainViewController, MusicDAO musicDAO) {
 		this.frame = frame;
 		this.mainViewController = mainViewController;
+		this.musicDAO = musicDAO;
 		optionPanel = new OptionPanel();
 	}
 
@@ -38,11 +40,12 @@ public class OptionsController implements MouseListener {
 	 */
 	public void setUpView() {
 		try {
-			bufferImage = ImageIO.read(getClass().getResource(ImageDAO.backgroundOnePlayer));
+			bufferImage = ImageIO.read(getClass().getResource(ImageDAO.BACKGROUND_OPTION));
 			Image newLoaderImage = bufferImage.getScaledInstance(780, 620, java.awt.Image.SCALE_SMOOTH);
 			frame.setContentPane(new JLabel(new ImageIcon(newLoaderImage)));
 			pnlView = optionPanel.pnlView();
-			frame.add(pnlView, BorderLayout.CENTER);
+			setButtonView();
+			frame.add(pnlView);
 			setEventProcessing();
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -50,9 +53,29 @@ public class OptionsController implements MouseListener {
 
 	}
 
+	public void setButtonView() {
+		try {
+			imgBtnOff = ImageIO.read(getClass().getResource(ImageDAO.offIcon));
+			imgBtnOn = ImageIO.read(getClass().getResource(ImageDAO.onIcon));
+			if (counta % 2 == 0) {
+				optionPanel.getLblBtnOn1().setIcon(new ImageIcon(imgBtnOn));
+			} else {
+				optionPanel.getLblBtnOn1().setIcon(new ImageIcon(imgBtnOff));
+			}
+			if (countb % 2 == 0) {
+				optionPanel.getLblBtnOn2().setIcon(new ImageIcon(imgBtnOn));
+			} else {
+				optionPanel.getLblBtnOn2().setIcon(new ImageIcon(imgBtnOff));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void setEventProcessing() {
 		optionPanel.getLblBtnBack().addMouseListener(this);
-		optionPanel.getLblBtnGo().addMouseListener(this);
+		optionPanel.getLblBtnOn1().addMouseListener(this);
+		optionPanel.getLblBtnOn2().addMouseListener(this);
 	}
 
 	public void setAttributeOfLabel(String imgIcon, JLabel lblItem) {
@@ -67,28 +90,53 @@ public class OptionsController implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		musicDAO.getListMusic().get(1).playSound(false);
+		//event for button back
 		if (e.getSource() == optionPanel.getLblBtnBack()) {
 			pnlView.setVisible(false);
-			mainViewController.playSounds(MusicDAO.pressMusic, false);
 			mainViewController.setMainView(true);
 			frame.repaint();
-		} else if (e.getSource() == optionPanel.getLblBtnGo()) {
-			mainViewController.playSounds(MusicDAO.pressMusic, false);
-			frame.setVisible(false);
-			// frame.repaint();
+		//event for button ON/OFF sound
+		} else if (e.getSource() == optionPanel.getLblBtnOn1()) {
+			++counta;
+			if (counta % 2 != 0) {
+				setAttributeOfLabel(ImageDAO.offIcon, optionPanel.getLblBtnOn1());
+				musicDAO.getListMusic().get(0).setOpenation(false);
+				musicDAO.getListMusic().get(0).stopSound();
+				musicDAO.getListMusic().get(1).setOpenation(false);
+				musicDAO.getListMusic().get(1).stopSound();
+				
+			} else {
+				setAttributeOfLabel(ImageDAO.onIcon, optionPanel.getLblBtnOn1());
+				musicDAO.getListMusic().get(0).setOpenation(true);
+				musicDAO.getListMusic().get(1).setOpenation(true);
+			}
+			frame.repaint();
+			//event for button ON/OFF music
+		} else if (e.getSource() == optionPanel.getLblBtnOn2()) {
+			++countb;
+			if (countb % 2 != 0) {
+				setAttributeOfLabel(ImageDAO.offIcon, optionPanel.getLblBtnOn2());
+				musicDAO.getListMusic().get(2).stopSound();
+				musicDAO.getListMusic().get(3).setOpenation(false);
+			} else {
+				setAttributeOfLabel(ImageDAO.onIcon, optionPanel.getLblBtnOn2());
+				musicDAO.getListMusic().get(2).playSound(true);
+				musicDAO.getListMusic().get(3).setOpenation(true);
+
+			}
+			frame.repaint();
 		}
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		musicDAO.getListMusic().get(0).playSound(false);
 		if (e.getSource() == optionPanel.getLblBtnBack()) {
 			setAttributeOfLabel(ImageDAO.sbackIcon, optionPanel.getLblBtnBack());
-			mainViewController.playSounds(MusicDAO.enteredMusic, false);
 			frame.repaint();
-		} else if (e.getSource() == optionPanel.getLblBtnGo()) {
-			setAttributeOfLabel(ImageDAO.sletgoIcon, optionPanel.getLblBtnGo());
-			mainViewController.playSounds(MusicDAO.enteredMusic, false);
-			frame.repaint();
+		} else if (e.getSource() == optionPanel.getLblBtnOn1()) {
+		} else if (e.getSource() == optionPanel.getLblBtnOn2()) {
 		}
 	}
 
@@ -97,10 +145,6 @@ public class OptionsController implements MouseListener {
 		if (e.getSource() == optionPanel.getLblBtnBack()) {
 			setAttributeOfLabel(ImageDAO.backIcon, optionPanel.getLblBtnBack());
 			frame.repaint();
-		} else if (e.getSource() == optionPanel.getLblBtnGo()) {
-			setAttributeOfLabel(ImageDAO.letgoIconIcon, optionPanel.getLblBtnGo());
-			frame.repaint();
-
 		}
 
 	}

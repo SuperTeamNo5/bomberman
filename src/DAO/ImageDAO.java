@@ -41,6 +41,7 @@ public class ImageDAO {
 	public static final String backgroundHighScore = "/images/backgrounds/mainbackground7.jpg";
 	public static final String backgroundOnePlayer = "/images/backgrounds/mainbackground6.png";
 	public static final String backround_game = "/images/backgrounds/background_Play.png";
+	public static final String BACKGROUND_OPTION = "/images/backgrounds/background8.jpg";
 	//characters
 	public static final String bomber_down = "/images/characters/bomber_down.png";
 	public static final String bomber_left = "/images/characters/bomber_left.png";
@@ -58,10 +59,13 @@ public class ImageDAO {
 	public static final String monster_Left = "/images/monsters/monster_left.png";
 	public static final String monster_Right = "/images/monsters/monster_right.png";
 	public static final String monster_UP = "/images/monsters/monster_up.png";
-	
-	public static final String avatarkhokhoImage = "/images/images/khokho.png";
-	public static final String avatarImage = "/images/images/bomer1.gif";
+	//image
+	public static final String AVATAR_IMAGE = "/images/images/khokho.png";
+	public static final String SOUND_IMAGE = "/images/images/sound.png";
+	public static final String MUSIC_IMAGE = "/images/images/music.png";
+	public static final String OPTION_IMAGE = "/images/images/optionimage.png";
 	//booms
+	public static final String avatarImage = "/images/images/bomer1.gif";
 	public static final String bomb = "/images/booms/boom1_1.gif";
 	//items
 	public static final String soda = "/images/items/item_bombsize.png";

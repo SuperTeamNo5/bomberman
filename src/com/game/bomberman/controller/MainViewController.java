@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import com.game.bomberman.model.Music;
 import com.game.bomberman.view.MainView;
 
 import DAO.ImageDAO;
@@ -29,14 +30,24 @@ public class MainViewController implements MouseListener, WindowListener {
 
 	public MainViewController() {
 //		waitController = new FrameWaitController();
+		musicDAO = new MusicDAO();
+		addMusic();
+		//run main song
 		mainView = new MainView();
-		highScoreController = new PanelHighScoreController(mainView, this);
-		onePlayerController = new OnePlayerController(mainView, this);
-		twoPlayersController = new OptionsController(mainView, this);
+		musicDAO.getListMusic().get(2).playSound(true);
+		highScoreController = new PanelHighScoreController(mainView, this,musicDAO);
+		onePlayerController = new OnePlayerController(mainView, this,musicDAO);
+		twoPlayersController = new OptionsController(mainView, this,musicDAO);
 		setEventProcessing();
-		playSounds(MusicDAO.backgroundMusic, true);
-		menuViewController = new MenuViewController(mainView.getMenubar(), this);
+		menuViewController = new MenuViewController(mainView.getMenubar(), this,musicDAO);
 
+	}
+	//create the list musics
+	public void addMusic() {
+		musicDAO.add(new Music("MusicEntered", MusicDAO.enteredMusic));
+		musicDAO.add(new Music("MusicClick", MusicDAO.pressMusic));
+		musicDAO.add(new Music("MusicBackground", MusicDAO.backgroundMusic));
+		musicDAO.add(new Music("MusicMap1", MusicDAO.MAP1_MUSIC));
 	}
 
 	// Method is use to close the game's window
@@ -49,22 +60,6 @@ public class MainViewController implements MouseListener, WindowListener {
 
 		if (quit == 0) {
 			System.exit(0);
-		}
-	}
-
-	// This method play the sound
-	public void playSounds(String linkMusic, boolean loop) {
-		try {
-			AudioInputStream audioIn;
-			audioIn = AudioSystem.getAudioInputStream(getClass().getResource(linkMusic));
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioIn);
-			clip.start();
-			if (loop) {// if loop is true, the sound will be loop
-				clip.loop(Clip.LOOP_CONTINUOUSLY);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -90,7 +85,7 @@ public class MainViewController implements MouseListener, WindowListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		playSounds(MusicDAO.pressMusic, false);
+		musicDAO.getListMusic().get(1).playSound(false);
 		if (e.getSource() == mainView.getPnlView().getLblPlayer1()) {
 			setMainView(false);
 			onePlayerController.setUpView();
@@ -114,7 +109,7 @@ public class MainViewController implements MouseListener, WindowListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		playSounds(MusicDAO.enteredMusic, false);
+		musicDAO.getListMusic().get(0).playSound(false);
 		if (e.getSource() == mainView.getPnlView().getLblPlayer1()) {
 			mainView.getPnlView().setAttributeOfLabel(ImageDAO.splayer1Icon, mainView.getPnlView().getLblPlayer1());
 

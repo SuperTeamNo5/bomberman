@@ -23,16 +23,17 @@ import DAO.MusicDAO;
 import DAO.ScoreDAO;
 
 public class PanelHighScoreController implements MouseListener {
+	private BufferedImage bufferImage;
 	HighScorePanel guiHighScore;
 	JFrame frame;
 	JPanel pnlView;
 	MainViewController mainViewController;
 	ScoreDAO scoreDAO;
-	private BufferedImage bufferImage;
-
-	public PanelHighScoreController(JFrame frame, MainViewController mainViewController) {
+	MusicDAO musicDAO;
+	public PanelHighScoreController(JFrame frame, MainViewController mainViewController,MusicDAO musicDAO) {
 		this.frame = frame;
 		this.mainViewController = mainViewController;
+		this.musicDAO=musicDAO;
 		scoreDAO = new ScoreDAO();
 		guiHighScore = new HighScorePanel();
 	}
@@ -98,7 +99,7 @@ public class PanelHighScoreController implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		pnlView.setVisible(false);
-		mainViewController.playSounds(MusicDAO.pressMusic, false);
+		musicDAO.getListMusic().get(1).playSound(false);
 		mainViewController.setMainView(true);
 		frame.repaint();
 	}
@@ -106,7 +107,7 @@ public class PanelHighScoreController implements MouseListener {
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		setAttributeOfLabel(ImageDAO.sbackIcon, guiHighScore.getLblBtnBack());
-		mainViewController.playSounds(MusicDAO.enteredMusic, false);
+		musicDAO.getListMusic().get(0).playSound(false);
 		frame.repaint();
 	}
 

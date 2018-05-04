@@ -15,10 +15,12 @@ import DAO.MusicDAO;
 public class MenuViewController implements ActionListener {
 	MenuView menuView;
 	MainViewController mainViewController;
+	MusicDAO musicDAO;
 
-	public MenuViewController(MenuView menuView, MainViewController mainViewController) {
+	public MenuViewController(MenuView menuView, MainViewController mainViewController, MusicDAO musicDAO) {
 		this.mainViewController = mainViewController;
 		this.menuView = menuView;
+		this.musicDAO = musicDAO;
 		setEventProcessing();
 	}
 
@@ -40,7 +42,7 @@ public class MenuViewController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		mainViewController.playSounds(MusicDAO.pressMusic, false);
+		musicDAO.getListMusic().get(1).playSound(false);
 		if (e.getSource() == menuView.getMniExit()) {
 			mainViewController.closing();
 		} else if (e.getSource() == menuView.getMniFresh()) {

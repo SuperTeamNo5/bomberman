@@ -9,83 +9,68 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import DAO.ImageDAO;
 
-public class OptionPanel extends JPanel{
-	private JPanel pnlOnePlayer, pnlBtn, pnlCenter;
-	private JLabel lblName, lblBtnBack, lblBtnGo, lblTitle, lblAvatar, lblHello, lblAvatargif;
-	private BufferedImage imgIconBack, imgIconGo, imgAvatar;
-	private ImageIcon imgAvatargif;
-	private JTextField txtName;
+public class OptionPanel extends JFrame {
+	private JPanel pnlOnePlayer;
+	private JLabel lblBtnBack, lblSound, lblMusic, lblTitle, lblBtnOn1, lblBtnOn2, lblTemp;
+	private BufferedImage imgIconBack, img1, img2;
 	private Image newLoaderImage;
 
-	public OptionPanel() {
-		// add(pnlView());
-	}
-
 	public JPanel pnlView() {
-		pnlOnePlayer = new JPanel(new BorderLayout());
-		lblTitle = new JLabel("OPTION", SwingConstants.CENTER);
-		lblTitle.setFont(new Font("Times New Roman", Font.BOLD, 30));
-		lblTitle.setForeground(Color.decode("#a71111"));
+		pnlOnePlayer = new JPanel();
+		pnlOnePlayer.setLayout(new BorderLayout());
 
-		pnlCenter = new JPanel();
-		pnlCenter.setBackground(new Color(117, 117, 117, 30));
-		lblName = new JLabel("Tell me your name:", SwingConstants.CENTER);
-		lblName.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		lblHello = new JLabel("Hi my boss!", SwingConstants.CENTER);
-		lblHello.setForeground(Color.decode("#e21b7f"));
-		lblHello.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 25));
-		lblName.setForeground(Color.decode("#e02b2b"));
-		lblAvatar = new JLabel();
-		txtName = new JTextField(10);
-		txtName.setFont(new Font("Times New Roman", Font.BOLD, 25));
-		txtName.setHorizontalAlignment(SwingConstants.CENTER);
-		txtName.requestFocusInWindow();
-		txtName.setForeground(Color.decode("#217ab5"));
-		txtName.setBorder(null);
-
-		pnlCenter.add(lblAvatar);
-		pnlCenter.add(lblHello);
-		pnlCenter.add(lblName);
-		pnlCenter.add(txtName);
-
-		pnlBtn = new JPanel(new BorderLayout());
-		lblBtnBack = new JLabel();
-		lblBtnGo = new JLabel();
-		lblAvatargif = new JLabel();
-		lblAvatargif.setHorizontalAlignment(SwingConstants.CENTER);
 		try {
+			lblTitle = new JLabel();
+			img1 = ImageIO.read(getClass().getResource(ImageDAO.OPTION_IMAGE));
+			newLoaderImage = img1.getScaledInstance(150, 45, java.awt.Image.SCALE_SMOOTH);
+			lblTitle.setIcon(new ImageIcon(newLoaderImage));
+			lblTitle.setBounds(325, 20, 150, 45);
+			pnlOnePlayer.add(lblTitle);
+
+			lblSound = new JLabel();
+			img1 = ImageIO.read(getClass().getResource(ImageDAO.SOUND_IMAGE));
+			newLoaderImage = img1.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+			lblSound.setIcon(new ImageIcon(newLoaderImage));
+			lblSound.setBounds(140, 100, 200, 200);
+			pnlOnePlayer.add(lblSound);
+
+			lblBtnOn1 = new JLabel();
+			lblBtnOn1.setBounds(360, 180, 83, 56);
+			pnlOnePlayer.add(lblBtnOn1);
+
+			lblMusic = new JLabel();
+			img2 = ImageIO.read(getClass().getResource(ImageDAO.MUSIC_IMAGE));
+			newLoaderImage = img2.getScaledInstance(150, 150, java.awt.Image.SCALE_SMOOTH);
+			lblMusic.setIcon(new ImageIcon(newLoaderImage));
+			lblMusic.setBounds(240, 300, 150, 150);
+			pnlOnePlayer.add(lblMusic);
+
+			lblBtnOn2 = new JLabel();
+			
+			lblBtnOn2.setBounds(410, 345, 83, 56);
+			pnlOnePlayer.add(lblBtnOn2);
+			//
+			lblBtnBack = new JLabel();
 			imgIconBack = ImageIO.read(getClass().getResource(ImageDAO.backIcon));
 			lblBtnBack.setIcon(new ImageIcon(imgIconBack));
+			lblBtnBack.setBounds(325, 480, 130, 68);
+			pnlOnePlayer.add(lblBtnBack);
 
-			imgAvatargif = new ImageIcon(getClass().getResource(ImageDAO.avatarKhoKho));
-			lblAvatargif.setIcon(imgAvatargif);
-
-			imgIconGo = ImageIO.read(getClass().getResource(ImageDAO.letgoIconIcon));
-			lblBtnGo.setIcon(new ImageIcon(imgIconGo));
-
-			imgAvatar = ImageIO.read(getClass().getResource(ImageDAO.avatarkhokhoImage));
-			newLoaderImage = imgAvatar.getScaledInstance(200, 208, java.awt.Image.SCALE_SMOOTH);
-			lblAvatar.setIcon(new ImageIcon(newLoaderImage));
+			lblTemp = new JLabel();
+			pnlOnePlayer.add(lblTemp);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		pnlBtn.add(lblBtnBack, BorderLayout.WEST);
-		pnlBtn.add(lblAvatargif, BorderLayout.CENTER);
-		pnlBtn.add(lblBtnGo, BorderLayout.EAST);
-		pnlOnePlayer.add(lblTitle, BorderLayout.NORTH);
-		pnlOnePlayer.add(pnlBtn, BorderLayout.SOUTH);
-		pnlOnePlayer.add(pnlCenter, BorderLayout.CENTER);
 
-		pnlBtn.setOpaque(false);
 		pnlOnePlayer.setOpaque(false);
-		pnlOnePlayer.setBounds(147, 60, 480, 450);
+		pnlOnePlayer.setBounds(0, 0, 780, 620);
 		return pnlOnePlayer;
 	}
 
@@ -97,20 +82,21 @@ public class OptionPanel extends JPanel{
 		this.lblBtnBack = lblBtnBack;
 	}
 
-	public JLabel getLblBtnGo() {
-		return lblBtnGo;
+	public JLabel getLblBtnOn1() {
+		return lblBtnOn1;
 	}
 
-	public void setLblBtnGo(JLabel lblBtnGo) {
-		this.lblBtnGo = lblBtnGo;
+	public void setLblBtnOn1(JLabel lblBtnOn1) {
+		this.lblBtnOn1 = lblBtnOn1;
 	}
 
-	public JTextField getTxtName() {
-		return txtName;
+	public JLabel getLblBtnOn2() {
+		return lblBtnOn2;
 	}
 
-	public void setTxtName(JTextField txtName) {
-		this.txtName = txtName;
+	public void setLblBtnOn2(JLabel lblBtnOn2) {
+		this.lblBtnOn2 = lblBtnOn2;
 	}
+
 
 }
