@@ -13,15 +13,25 @@ import com.game.bomberman.model.Player;
 import com.game.bomberman.model.Position;
 import com.game.bomberman.view.ViewGame;
 
+import DAO.MusicDAO;
+
 // including methods action for game
 public class Action {
 	private Player player;
 	private List<Barrier> bar;
 	private List<Loot> loot;
 	private List<Monster> mons;
-
 	private Map map;
 	private ViewGame view;
+	MusicDAO musicDAO;
+	
+	public MusicDAO getMusicDAO() {
+		return musicDAO;
+	}
+
+	public void setMusicDAO(MusicDAO musicDAO) {
+		this.musicDAO = musicDAO;
+	}
 
 	public Action(Map map) {
 		this.map = map;
@@ -123,6 +133,7 @@ public class Action {
 				// rec2));
 				if (player.getCharacter().collision(rec1, rec2)) {
 					// System.out.println("va cham vs loot");
+					musicDAO.getListMusic().get(0).playSound(false);
 					player.getCharacter().getBag().add(loot.get(i));
 					loot.remove(i);
 					map.setLoot(loot);

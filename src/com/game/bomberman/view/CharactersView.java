@@ -2,11 +2,8 @@ package com.game.bomberman.view;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -14,6 +11,7 @@ import com.game.bomberman.model.Characters;
 
 import DAO.ImageDAO;
 
+@SuppressWarnings("serial")
 public class CharactersView extends JPanel {
 	private Characters characters;
 	private Image img;

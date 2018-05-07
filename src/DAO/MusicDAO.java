@@ -41,7 +41,5 @@ public class MusicDAO {
 	public ArrayList<Music> getListMusic() {
 		return listMusic;
 	}
-	
-	
 
 }
