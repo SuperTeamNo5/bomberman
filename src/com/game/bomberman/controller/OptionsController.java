@@ -90,7 +90,7 @@ public class OptionsController implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		musicDAO.getListMusic().get(1).playSound(false);
+		musicDAO.getListSound().get(1).playSound(false);
 		//event for button back
 		if (e.getSource() == optionPanel.getLblBtnBack()) {
 			pnlView.setVisible(false);
@@ -100,16 +100,22 @@ public class OptionsController implements MouseListener {
 		} else if (e.getSource() == optionPanel.getLblBtnOn1()) {
 			++counta;
 			if (counta % 2 != 0) {
+				System.out.println("Sound off");
 				setAttributeOfLabel(ImageDAO.offIcon, optionPanel.getLblBtnOn1());
-				musicDAO.getListMusic().get(0).setOpenation(false);
-				musicDAO.getListMusic().get(0).stopSound();
-				musicDAO.getListMusic().get(1).setOpenation(false);
-				musicDAO.getListMusic().get(1).stopSound();
+				musicDAO.getListSound().get(0).stopSound();
+				musicDAO.getListSound().get(0).setOpenation(false);
+				musicDAO.getListSound().get(1).stopSound();
+				musicDAO.getListSound().get(1).setOpenation(false);
+				for (int i = 2; i < musicDAO.getListSound().size(); i++) {
+					musicDAO.getListSound().get(i).setOpenation(false);
+				}
 				
 			} else {
+				System.out.println("Sound on");
 				setAttributeOfLabel(ImageDAO.onIcon, optionPanel.getLblBtnOn1());
-				musicDAO.getListMusic().get(0).setOpenation(true);
-				musicDAO.getListMusic().get(1).setOpenation(true);
+				for (int i = 0; i < musicDAO.getListSound().size(); i++) {
+					musicDAO.getListSound().get(i).setOpenation(true);
+				}
 			}
 			frame.repaint();
 			//event for button ON/OFF music
@@ -117,12 +123,16 @@ public class OptionsController implements MouseListener {
 			++countb;
 			if (countb % 2 != 0) {
 				setAttributeOfLabel(ImageDAO.offIcon, optionPanel.getLblBtnOn2());
-				musicDAO.getListMusic().get(2).stopSound();
-				musicDAO.getListMusic().get(3).setOpenation(false);
+				musicDAO.getListMusic().get(0).stopSound();
+				for (int i = 1; i < musicDAO.getListMusic().size(); i++) {
+					musicDAO.getListMusic().get(i).setOpenation(false);
+				}
 			} else {
+				musicDAO.getListMusic().get(0).playSound(true);
 				setAttributeOfLabel(ImageDAO.onIcon, optionPanel.getLblBtnOn2());
-				musicDAO.getListMusic().get(2).playSound(true);
-				musicDAO.getListMusic().get(3).setOpenation(true);
+				for (int i = 1; i < musicDAO.getListMusic().size(); i++) {
+					musicDAO.getListMusic().get(i).setOpenation(true);
+				}
 
 			}
 			frame.repaint();
@@ -131,7 +141,7 @@ public class OptionsController implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		musicDAO.getListMusic().get(0).playSound(false);
+		musicDAO.getListSound().get(0).playSound(false);
 		if (e.getSource() == optionPanel.getLblBtnBack()) {
 			setAttributeOfLabel(ImageDAO.sbackIcon, optionPanel.getLblBtnBack());
 			frame.repaint();

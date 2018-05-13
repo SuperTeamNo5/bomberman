@@ -23,15 +23,15 @@ public class MenuView extends JMenuBar {
 		mnuFile.setIcon(new ImageIcon(getClass().getResource(ImageDAO.fileIcon)));
 		// mnuFile.setMnemonic(KeyEvent.VK_F);
 
-		mniFresh = new JMenuItem("New game");
-		mniFresh.setIcon(new ImageIcon(getClass().getResource(ImageDAO.refreshIcon)));
-		mniFresh.setEnabled(false);
-		mnuFile.add(mniFresh);
-
-		mniSave = new JMenuItem("Save game");
-		mniSave.setIcon(new ImageIcon(getClass().getResource(ImageDAO.saveIcon)));
-		mniSave.setEnabled(false);
-		mnuFile.add(mniSave);
+//		mniFresh = new JMenuItem("New game");
+//		mniFresh.setIcon(new ImageIcon(getClass().getResource(ImageDAO.refreshIcon)));
+//		mniFresh.setEnabled(false);
+//		mnuFile.add(mniFresh);
+//
+//		mniSave = new JMenuItem("Save game");
+//		mniSave.setIcon(new ImageIcon(getClass().getResource(ImageDAO.saveIcon)));
+//		mniSave.setEnabled(false);
+//		mnuFile.add(mniSave);
 
 		mniLoad = new JMenuItem("Load game");
 		mniLoad.setIcon(new ImageIcon(getClass().getResource(ImageDAO.loadIcon)));
@@ -81,13 +81,13 @@ public class MenuView extends JMenuBar {
 		this.mnuHelp = mnuHelp;
 	}
 
-	public JMenuItem getMniFresh() {
-		return mniFresh;
-	}
-
-	public void setMniFresh(JMenuItem mniFresh) {
-		this.mniFresh = mniFresh;
-	}
+//	public JMenuItem getMniFresh() {
+//		return mniFresh;
+//	}
+//
+//	public void setMniFresh(JMenuItem mniFresh) {
+//		this.mniFresh = mniFresh;
+//	}
 
 	public JMenuItem getMniExit() {
 		return mniExit;
@@ -97,13 +97,13 @@ public class MenuView extends JMenuBar {
 		this.mniExit = mniExit;
 	}
 
-	public JMenuItem getMniSave() {
-		return mniSave;
-	}
-
-	public void setMniSave(JMenuItem mniSave) {
-		this.mniSave = mniSave;
-	}
+//	public JMenuItem getMniSave() {
+//		return mniSave;
+//	}
+//
+//	public void setMniSave(JMenuItem mniSave) {
+//		this.mniSave = mniSave;
+//	}
 
 	public JMenuItem getMniLoad() {
 		return mniLoad;

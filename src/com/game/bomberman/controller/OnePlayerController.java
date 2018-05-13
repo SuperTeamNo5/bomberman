@@ -69,14 +69,14 @@ public class OnePlayerController implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		musicDAO.getListMusic().get(1).playSound(false);
+		musicDAO.getListSound().get(1).playSound(false);
 		if (e.getSource() == playerPanel.getLblBtnBack()) {
 			pnlView.setVisible(false);
 			mainViewController.setMainView(true);
 			frame.repaint();
 		} else if (e.getSource() == playerPanel.getLblBtnGo()) {
-			musicDAO.getListMusic().get(2).stopSound();
-			musicDAO.getListMusic().get(3).playSound(true);
+			musicDAO.getListMusic().get(0).stopSound();
+			musicDAO.getListMusic().get(1).playSound(true);
 			frame.setVisible(false);
 			gameView = new RunGame(musicDAO);
 			// frame.repaint();
@@ -85,7 +85,7 @@ public class OnePlayerController implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		musicDAO.getListMusic().get(0).playSound(false);
+		musicDAO.getListSound().get(0).playSound(false);
 		if (e.getSource() == playerPanel.getLblBtnBack()) {
 			setAttributeOfLabel(ImageDAO.sbackIcon, playerPanel.getLblBtnBack());
 			frame.repaint();

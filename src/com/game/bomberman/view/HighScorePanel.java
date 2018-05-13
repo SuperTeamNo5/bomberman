@@ -39,7 +39,7 @@ public class HighScorePanel extends JPanel {
 		pnlBtnBack = new JPanel(new FlowLayout());
 		lblTitle = new JLabel("HIGH SCORE", SwingConstants.CENTER);
 		lblTitle.setFont(new Font("Times New Roman", Font.BOLD, 30));
-		lblTitle.setForeground(Color.decode("#6af1c7"));
+		lblTitle.setForeground(Color.decode("#ff3333"));
 
 		lblBtnBack = new JLabel();
 		try {

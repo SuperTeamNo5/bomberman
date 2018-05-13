@@ -99,7 +99,7 @@ public class PanelHighScoreController implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		pnlView.setVisible(false);
-		musicDAO.getListMusic().get(1).playSound(false);
+		musicDAO.getListSound().get(1).playSound(false);
 		mainViewController.setMainView(true);
 		frame.repaint();
 	}
@@ -107,7 +107,7 @@ public class PanelHighScoreController implements MouseListener {
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		setAttributeOfLabel(ImageDAO.sbackIcon, guiHighScore.getLblBtnBack());
-		musicDAO.getListMusic().get(0).playSound(false);
+		musicDAO.getListSound().get(0).playSound(false);
 		frame.repaint();
 	}
 

@@ -31,10 +31,9 @@ public class MainViewController implements MouseListener, WindowListener {
 	public MainViewController() {
 //		waitController = new FrameWaitController();
 		musicDAO = new MusicDAO();
-		addMusic();
 		//run main song
 		mainView = new MainView();
-		musicDAO.getListMusic().get(2).playSound(true);
+		musicDAO.getListMusic().get(0).playSound(true);
 		highScoreController = new PanelHighScoreController(mainView, this,musicDAO);
 		onePlayerController = new OnePlayerController(mainView, this,musicDAO);
 		twoPlayersController = new OptionsController(mainView, this,musicDAO);
@@ -42,13 +41,7 @@ public class MainViewController implements MouseListener, WindowListener {
 		menuViewController = new MenuViewController(mainView.getMenubar(), this,musicDAO);
 
 	}
-	//create the list musics
-	public void addMusic() {
-		musicDAO.add(new Music("MusicEntered", MusicDAO.enteredMusic));
-		musicDAO.add(new Music("MusicClick", MusicDAO.pressMusic));
-		musicDAO.add(new Music("MusicBackground", MusicDAO.backgroundMusic));
-		musicDAO.add(new Music("MusicMap1", MusicDAO.MAP1_MUSIC));
-	}
+	
 
 	// Method is use to close the game's window
 	public void closing() {
@@ -85,7 +78,7 @@ public class MainViewController implements MouseListener, WindowListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		musicDAO.getListMusic().get(1).playSound(false);
+		musicDAO.getListSound().get(1).playSound(false);
 		if (e.getSource() == mainView.getPnlView().getLblPlayer1()) {
 			setMainView(false);
 			onePlayerController.setUpView();
@@ -109,7 +102,7 @@ public class MainViewController implements MouseListener, WindowListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		musicDAO.getListMusic().get(0).playSound(false);
+		musicDAO.getListSound().get(0).playSound(false);
 		if (e.getSource() == mainView.getPnlView().getLblPlayer1()) {
 			mainView.getPnlView().setAttributeOfLabel(ImageDAO.splayer1Icon, mainView.getPnlView().getLblPlayer1());
 

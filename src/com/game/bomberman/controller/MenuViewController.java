@@ -27,15 +27,15 @@ public class MenuViewController implements ActionListener {
 	private void setEventProcessing() {
 
 		menuView.getMniExit().addActionListener(this);
-		menuView.getMniFresh().addActionListener(this);
+//		menuView.getMniFresh().addActionListener(this);
 		menuView.getMniLoad().addActionListener(this);
-		menuView.getMniSave().addActionListener(this);
+//		menuView.getMniSave().addActionListener(this);
 		menuView.getInforAuthor().addActionListener(this);
 
 		menuView.getMniExit().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
-		menuView.getMniFresh().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
+//		menuView.getMniFresh().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
 		menuView.getMniLoad().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
-		menuView.getMniSave().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+//		menuView.getMniSave().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		menuView.getInforAuthor().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, ActionEvent.CTRL_MASK));
 
 	}
@@ -45,11 +45,11 @@ public class MenuViewController implements ActionListener {
 		musicDAO.getListMusic().get(1).playSound(false);
 		if (e.getSource() == menuView.getMniExit()) {
 			mainViewController.closing();
-		} else if (e.getSource() == menuView.getMniFresh()) {
+//		} else if (e.getSource() == menuView.getMniFresh()) {
 
 		} else if (e.getSource() == menuView.getMniLoad()) {
 
-		} else if (e.getSource() == menuView.getMniSave()) {
+//		} else if (e.getSource() == menuView.getMniSave()) {
 
 		} else if (e.getSource() == menuView.getInforAuthor()) {
 
