@@ -1,7 +1,7 @@
 package DAO;
 
 public class ImageDAO {
-	//icon
+	// icon
 	public static final String fileIcon = "/images/icon/file.png";
 	public static final String helpIcon = "/images/icon/question.png";
 	public static final String cursorGreenIcon = "/images/icon/greencursor.gif";
@@ -27,16 +27,16 @@ public class ImageDAO {
 	public static final String soptionIcon = "/images/button/options.png";
 	public static final String quitIcon = "/images/button/quit.png";
 	public static final String squitIcon = "/images/button/quits.png";
-	//gif for background
+	// gif for background
 	public static final String loader = "/images/loaders.gif";
 	public static final String welcomeImage = "/images/welcome.gif";
-	//background
+	// background
 	public static final String backgroundImage = "/images/background.png";
 	public static final String backgroundLoader = "/images/backgroundload.png";
 	public static final String backgroundHighScore = "/images/mainbackground7.jpg";
 	public static final String backgroundOnePlayer = "/images/mainbackground6.png";
 	public static final String backround_game = "/images/background_Play.png";
-	//item
+	// item
 	public static final String avatarKhoKho = "/images/item/khokho.gif";
 	public static final String avatarkhokhoImage = "/images/item/khokho.png";
 	public static final String avatarImage = "/images/item/bomer1.gif";
@@ -57,5 +57,10 @@ public class ImageDAO {
 	public static final String shoes = "/images/item/item_shoe.png";
 	public static final String bomb_item = "/images/item/item_bomb.png";
 	public static final String CharDead = "/images/ghost.png";
+	public static final String bombang_down = "/images/item/bombbang_down_2.png";
+	public static final String bombang_up = "/images/item/bombbang_up_2.png";
+	public static final String bombang_right = "/images/item/bombbang_right_2.png";
+	public static final String bombang_left = "/images/item/bombbang_left_2.png";
+	public static final String bomber_Dead = "/images/item/bomber_dead.png";
 
 }

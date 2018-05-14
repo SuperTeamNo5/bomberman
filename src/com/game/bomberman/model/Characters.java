@@ -8,9 +8,10 @@ public class Characters implements Move {
 	private Position position;
 	private Bag bag;
 	private int speedRow, speedColumn;
-	private final int width = 45;
-	private final int height = 55;
+	private final int width = 40;
+	private final int height = 50;
 	private boolean dead;
+	private boolean collisionVsBomb;
 
 	public Characters(String name, String directional, Position position, Bag bag, int speedRow, int speedColumn) {
 		super();
@@ -21,6 +22,7 @@ public class Characters implements Move {
 		this.speedRow = speedRow;
 		this.speedColumn = speedColumn;
 		this.dead = false;
+		this.collisionVsBomb = false;
 		defaultLootInBag();
 	}
 
@@ -86,7 +88,7 @@ public class Characters implements Move {
 		getBag().add(loot);
 		loot = new Shoes("shoes", 2);
 		getBag().add(loot);
-		loot = new Soda("soda", 1);
+		loot = new Soda("soda", 2);
 		getBag().add(loot);
 	}
 
@@ -136,5 +138,13 @@ public class Characters implements Move {
 
 	public void setDead(boolean dead) {
 		this.dead = dead;
+	}
+
+	public boolean isCollisionVsBomb() {
+		return collisionVsBomb;
+	}
+
+	public void setCollisionVsBomb(boolean collisionVsBomb) {
+		this.collisionVsBomb = collisionVsBomb;
 	}
 }
