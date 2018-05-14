@@ -62,20 +62,18 @@ public class MainView extends JFrame {
 			setCursor(cursor);
 			// set layeredpane cho panel cua cac nut duoc popup
 			setLayeredPane(layerPane);
-			// Táº¡o hÃ¬nh ná»�n
+			// Create a background for the main view 
 			myImage = ImageIO.read(getClass().getResource(ImageDAO.backgroundImage));
 			newLoaderImage = myImage.getScaledInstance(780, 620, java.awt.Image.SCALE_SMOOTH);
 			setContentPane(new JLabel(new ImageIcon(newLoaderImage)));
 			setLayout(new BorderLayout());
-			// Táº¡o Menubar
+			// Create the Menubar
 			setTitle("Bomberman");
 			// Create the menu
 			setJMenuBar(menubar);
 			// add panel main view
 
 			layerPane.add(getPnlView(), JLayeredPane.POPUP_LAYER);
-//			layerPane.add(getPnlView(), JLayeredPane.POPUP_LAYER);
-			// layerPane.add(getPnlView(),JLayeredPane.POPUP_LAYER);
 			// icon of application
 			Image imgAvatar1 = ImageIO.read(getClass().getResource(ImageDAO.boomIcon));
 			setIconImage(imgAvatar1);

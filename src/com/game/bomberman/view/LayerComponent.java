@@ -7,7 +7,6 @@ public class LayerComponent extends JLayeredPane {
 	
 	
 	public LayerComponent() {
-//		add(new PanelMainView(),JLayeredPane.POPUP_LAYER);
 		add(new HighScorePanel(),JLayeredPane.POPUP_LAYER);
 	}
 

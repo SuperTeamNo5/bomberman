@@ -9,9 +9,11 @@ import com.game.bomberman.model.Position;
 import com.game.bomberman.view.MainViewOfGame;
 import com.game.bomberman.view.ViewGame;
 
+import DAO.MusicDAO;
+
 public class RunGame {
 
-	public RunGame() {
+	public RunGame(MusicDAO musicDAO) {
 		Player player = new Player("Han", 0, new Characters("bongmo", "down", new Position(0, 0), new Bag(), 0, 0));
 
 		Map map = new MapLv1(player);
@@ -24,6 +26,7 @@ public class RunGame {
 //		map.getBar().remove(1);
 
 		Action act = new Action(map);
+		act.setMusicDAO(musicDAO);
 		MonsAction monsAct = new MonsAction(map);
 
 		ViewGame view = new ViewGame(map, act, monsAct);
@@ -37,7 +40,10 @@ public class RunGame {
 		game.addKeyListener(key);
 	}
 
+<<<<<<< HEAD
 	public static void main(String[] args) {
 		new RunGame();
 	}
+=======
+>>>>>>> fd64fbf61459e193b72c9f68585ed7e5fcb3f67e
 }

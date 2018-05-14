@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import com.game.bomberman.model.Music;
 import com.game.bomberman.view.MainView;
 
 import DAO.ImageDAO;
@@ -25,44 +26,33 @@ public class MainViewController implements MouseListener, WindowListener {
 	MenuViewController menuViewController;
 	PanelHighScoreController highScoreController;
 	OnePlayerController onePlayerController;
+	OptionsController twoPlayersController;
 
 	public MainViewController() {
-		waitController = new FrameWaitController();
+//		waitController = new FrameWaitController();
+		musicDAO = new MusicDAO();
+		//run main song
 		mainView = new MainView();
-		highScoreController = new PanelHighScoreController(mainView, this);
-		onePlayerController = new OnePlayerController(mainView, this);
+		musicDAO.getListMusic().get(0).playSound(true);
+		highScoreController = new PanelHighScoreController(mainView, this,musicDAO);
+		onePlayerController = new OnePlayerController(mainView, this,musicDAO);
+		twoPlayersController = new OptionsController(mainView, this,musicDAO);
 		setEventProcessing();
-		playSounds(MusicDAO.backgroundMusic, true);
-		menuViewController= new MenuViewController(mainView.getMenubar(),this);
+		menuViewController = new MenuViewController(mainView.getMenubar(), this,musicDAO);
 
 	}
+	
 
 	// Method is use to close the game's window
 	public void closing() {
 		String[] buttons = { "Do it", "Never" };
-		ImageIcon icon = new ImageIcon(getClass().getResource("/images/cry1.gif"));
+		ImageIcon icon = new ImageIcon(getClass().getResource(ImageDAO.outGameImage));
 
 		int quit = JOptionPane.showOptionDialog(null, "Close, because lose right?", "Close Bomberman ",
 				JOptionPane.INFORMATION_MESSAGE, 0, icon, buttons, null);
 
 		if (quit == 0) {
 			System.exit(0);
-		}
-	}
-
-	// This method play the sound
-	public void playSounds(String linkMusic, boolean loop) {
-		try {
-			AudioInputStream audioIn;
-			audioIn = AudioSystem.getAudioInputStream(getClass().getResource(linkMusic));
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioIn);
-			clip.start();
-			if (loop) {// if loop is true, the sound will be loop
-				clip.loop(Clip.LOOP_CONTINUOUSLY);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -88,10 +78,10 @@ public class MainViewController implements MouseListener, WindowListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		playSounds(MusicDAO.pressMusic, false);
+		musicDAO.getListSound().get(1).playSound(false);
 		if (e.getSource() == mainView.getPnlView().getLblPlayer1()) {
-			 setMainView(false);
-			 onePlayerController.setUpView();
+			setMainView(false);
+			onePlayerController.setUpView();
 
 		} else if (e.getSource() == mainView.getPnlView().getLblPlayer2()) {
 
@@ -100,6 +90,8 @@ public class MainViewController implements MouseListener, WindowListener {
 			highScoreController.setUpView();
 
 		} else if (e.getSource() == mainView.getPnlView().getLblOption()) {
+			setMainView(false);
+			twoPlayersController.setUpView();
 
 		} else if (e.getSource() == mainView.getPnlView().getLblQuit()) {
 			closing();
@@ -110,7 +102,7 @@ public class MainViewController implements MouseListener, WindowListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		playSounds(MusicDAO.enteredMusic, false);
+		musicDAO.getListSound().get(0).playSound(false);
 		if (e.getSource() == mainView.getPnlView().getLblPlayer1()) {
 			mainView.getPnlView().setAttributeOfLabel(ImageDAO.splayer1Icon, mainView.getPnlView().getLblPlayer1());
 

@@ -13,15 +13,25 @@ import com.game.bomberman.model.Player;
 import com.game.bomberman.model.Position;
 import com.game.bomberman.view.ViewGame;
 
+import DAO.MusicDAO;
+
 // including methods action for game
 public class Action {
 	private Player player;
 	private List<Barrier> bar;
 	private List<Loot> loot;
 	private List<Monster> mons;
-
 	private Map map;
 	private ViewGame view;
+	MusicDAO musicDAO;
+	
+	public MusicDAO getMusicDAO() {
+		return musicDAO;
+	}
+
+	public void setMusicDAO(MusicDAO musicDAO) {
+		this.musicDAO = musicDAO;
+	}
 
 	public Action(Map map) {
 		this.map = map;
@@ -103,6 +113,7 @@ public class Action {
 		// int x = chara.getPosition().getxCoordinate();
 		// int y = chara.getPosition().getyCoordinate();
 		if (chara.getBag().search("bombItem").getQuatity() > 0) {
+			musicDAO.getListSound().get(5).playSound(false);
 			Loot bomb = new Boom("bomb", new Position((x / 50) * 50, (y / 50) * 50), 500);
 			loot.add(bomb);
 			chara.getBag().search("bombItem").setQuatity(chara.getBag().search("bombItem").getQuatity() - 1);
@@ -131,6 +142,7 @@ public class Action {
 				// rec2));
 				if (player.getCharacter().collision(rec1, rec2)) {
 					// System.out.println("va cham vs loot");
+					musicDAO.getListSound().get(6).playSound(false);
 					player.getCharacter().getBag().add(loot.get(i));
 					loot.remove(i);
 					map.setLoot(loot);
@@ -149,6 +161,7 @@ public class Action {
 			Monster mon = mons.get(i);
 			rec2 = new Rectangle(mon.getPosition().getxCoordinate(), mon.getPosition().getyCoordinate(), 45, 55);
 			if (player.getCharacter().collision(rec1, rec2)) {
+				musicDAO.getListSound().get(3).playSound(false);
 				player.getCharacter().dead();
 				// System.out.println("xxxxxxxxxxxx: " +
 				// player.getCharacter().isDead());

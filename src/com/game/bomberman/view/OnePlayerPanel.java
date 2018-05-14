@@ -71,7 +71,7 @@ public class OnePlayerPanel extends JPanel {
 			imgIconGo = ImageIO.read(getClass().getResource(ImageDAO.letgoIconIcon));
 			lblBtnGo.setIcon(new ImageIcon(imgIconGo));
 
-			imgAvatar = ImageIO.read(getClass().getResource(ImageDAO.avatarkhokhoImage));
+			imgAvatar = ImageIO.read(getClass().getResource(ImageDAO.AVATAR_IMAGE));
 			newLoaderImage = imgAvatar.getScaledInstance(200, 208, java.awt.Image.SCALE_SMOOTH);
 			lblAvatar.setIcon(new ImageIcon(newLoaderImage));
 		} catch (IOException e) {
