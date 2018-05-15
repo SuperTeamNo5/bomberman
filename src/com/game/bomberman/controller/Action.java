@@ -55,6 +55,9 @@ public class Action {
 			updateCharAfterCollision();
 			return;
 		}
+		if (player.getCharacter().isCollisionVsBomb()) {
+			return;
+		}
 		player.getCharacter().moveARow();
 		player.getCharacter().moveAColumn();
 		// System.out.println(player.getCharacter().getSpeedColumn());
@@ -93,7 +96,7 @@ public class Action {
 		Rectangle rec2, rec3;
 		for (int i = 0; i < bar.size(); i++) {
 			rec2 = new Rectangle(bar.get(i).getPosition().getxCoordinate(), bar.get(i).getPosition().getyCoordinate(),
-					bar.get(i).getWidth(), bar.get(i).getHeight() - 30);
+					bar.get(i).getWidth(), bar.get(i).getHeight() - 20);
 			if (player.getCharacter().collision(rec1, rec2)) {
 				// System.out.println("va cham");
 				return rec2;
@@ -125,11 +128,16 @@ public class Action {
 		Rectangle rec2;
 		// dropBomb();
 		for (int i = 0; i < loot.size(); i++) {
-			if (loot.get(i).getName().equalsIgnoreCase("bomb")) {
-				
+			if (loot.get(i).getName().equalsIgnoreCase("bomb") || loot.get(i).getName().equalsIgnoreCase("bombang")) {
+				if (loot.get(i).getName().equalsIgnoreCase("bombang")) {
+					Boom bomb = (Boom) loot.get(i);
+					setSizeBomb(bomb);
+					bombangvsBox(bomb);
+					bombangvsMonsVsBomber(bomb);
+				}
 			} else {
 				rec2 = new Rectangle(loot.get(i).getPositon().getxCoordinate() + 10,
-						loot.get(i).getPositon().getyCoordinate() + 10, 30, 30);
+						loot.get(i).getPositon().getyCoordinate() + 10, 15, 15);
 				// System.out.println(player.getCharacter().collision(rec1,
 				// rec2));
 				if (player.getCharacter().collision(rec1, rec2)) {
@@ -168,20 +176,129 @@ public class Action {
 		for (int i = 0; i < loot.size(); i++) {
 			if (loot.get(i).getName().equalsIgnoreCase("bomb")) {
 				lo = (Boom) loot.get(i);
-				if (boomBang(lo) == true) {
-					loot.remove(i);
-					chara.getBag().search("bombItem").setQuatity(chara.getBag().search("bombItem").getQuatity() + 1);
+				lo.setDeadLine(lo.getDeadLine() - 1);
+				if (lo.getDeadLine() <= 15) {
+					lo.setName("bombang");
+				}
+			} else {
+				if (loot.get(i).getName().equalsIgnoreCase("bombang")) {
+					lo = (Boom) loot.get(i);
+					if (boomBang(lo) == true) {
+						loot.remove(i);
+						chara.getBag().search("bombItem")
+								.setQuatity(chara.getBag().search("bombItem").getQuatity() + 1);
+					}
 				}
 			}
 		}
 	}
 
 	public boolean boomBang(Boom bomb) {
-		bomb.setDeadLine(bomb.getDeadLine() - 1);
 		if (bomb.getDeadLine() == 0) {
 			return true;
 		}
+		bomb.setDeadLine(bomb.getDeadLine() - 1);
 		return false;
+	}
+
+	public void bombangvsBox(Boom bomb) {
+		// setSizeBomb(bomb);
+		Rectangle rec_right = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(),
+				45 + 45 * bomb.getBombang_right(), 45);
+		Rectangle rec_left = new Rectangle(bomb.getPositon().getxCoordinate() - (45 * bomb.getBombang_left()),
+				bomb.getPositon().getyCoordinate(), 45 + 45 * bomb.getBombang_left(), 45);
+		Rectangle rec_down = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(), 45,
+				45 + 45 * bomb.getBombang_down());
+		Rectangle rec_up = new Rectangle(bomb.getPositon().getxCoordinate(),
+				bomb.getPositon().getyCoordinate() - (45 * bomb.getBombang_up()), 45, 45 + 45 * bomb.getBombang_up());
+		for (int i = 0; i < bar.size(); i++) {
+			Barrier barrier = bar.get(i);
+			Rectangle rec_Box = new Rectangle(barrier.getPosition().getxCoordinate(),
+					barrier.getPosition().getyCoordinate(), 50, 50);
+			if (rec_Box.intersects(rec_up) || rec_Box.intersects(rec_down) || rec_Box.intersects(rec_left)
+					|| rec_Box.intersects(rec_right)) {
+				if (bar.get(i).isCanDestroy()) {
+					bar.remove(i);
+				}
+			}
+			// if (rec_Box.intersects(rec_up)) {
+			// if (bar.get(i).isCanDestroy()) {
+			// int size = (rec_up.height - (rec_Box.y - rec_up.y)) / 50;
+			// bomb.setBombang_up(size);
+			// bar.remove(i);
+			// }
+			// }
+			// if (rec_Box.intersects(rec_down)) {
+			// if (bar.get(i).isCanDestroy()) {
+			// int size = (rec_Box.y - rec_down.y) / 50;
+			// bomb.setBombang_down(size);
+			// bar.remove(i);
+			// }
+			// }
+			// if (rec_Box.intersects(rec_right)) {
+			// if (bar.get(i).isCanDestroy()) {
+			// int size = ((rec_Box.x - rec_right.x)) / 50;
+			// bomb.setBombang_right(size);
+			//// rec_right.
+			// bar.remove(i);
+			// }
+			// }
+			// if (rec_Box.intersects(rec_left)) {
+			// if (bar.get(i).isCanDestroy()) {
+			// int size = (rec_left.width - (rec_Box.x - rec_left.x)) / 50;
+			// bomb.setBombang_left(size);
+			// bar.remove(i);
+			// }
+			// }
+		}
+	}
+
+	public void bombangvsMonsVsBomber(Boom bomb) {
+		Rectangle rec_right = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(),
+				45 + 45 * bomb.getBombang_right(), 45);
+		Rectangle rec_left = new Rectangle(bomb.getPositon().getxCoordinate() - 45, bomb.getPositon().getyCoordinate(),
+				45 + 45 * bomb.getBombang_left(), 45);
+		Rectangle rec_down = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(), 45,
+				45 + 45 * bomb.getBombang_down());
+		Rectangle rec_up = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate() - 45,
+				45, 45 + 45 * bomb.getBombang_up());
+		for (int i = 0; i < mons.size(); i++) {
+			Monster mon = mons.get(i);
+			Rectangle rec_Mons = new Rectangle(mon.getPosition().getxCoordinate(), mon.getPosition().getyCoordinate(),
+					45, 55);
+			if (rec_Mons.intersects(rec_up) || rec_Mons.intersects(rec_down) || rec_Mons.intersects(rec_left)
+					|| rec_Mons.intersects(rec_right)) {
+				mons.remove(i);
+				player.setScore(player.getScore() + 10);
+			}
+		}
+		Characters characters = player.getCharacter();
+		Rectangle rec_Char = new Rectangle(characters.getPosition().getxCoordinate(),
+				characters.getPosition().getyCoordinate(), characters.getWidth(), characters.getHeight());
+		if (rec_Char.intersects(rec_up) || rec_Char.intersects(rec_down) || rec_Char.intersects(rec_left)
+				|| rec_Char.intersects(rec_right)) {
+			characters.setCollisionVsBomb(true);
+		}
+	}
+
+	public List<Barrier> getBar() {
+		return bar;
+	}
+
+	public List<Monster> getMons() {
+		return mons;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setSizeBomb(Boom bomb) {
+		bomb.setBombang_down(player.getCharacter().getBag().search("soda").getQuatity());
+		bomb.setBombang_left(player.getCharacter().getBag().search("soda").getQuatity());
+		bomb.setBombang_right(player.getCharacter().getBag().search("soda").getQuatity());
+		bomb.setBombang_up(player.getCharacter().getBag().search("soda").getQuatity());
+//		return bomb;
 	}
 
 }

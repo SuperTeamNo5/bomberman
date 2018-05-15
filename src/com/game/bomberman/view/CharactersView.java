@@ -56,6 +56,12 @@ public class CharactersView extends JPanel {
 	}
 
 	public void bongMo(Graphics g) throws IOException {
+		if (characters.isCollisionVsBomb()) {
+			img = new ImageIcon(getClass().getResource(ImageDAO.bomber_Dead)).getImage();
+			g.drawImage(img, characters.getPosition().getxCoordinate(), characters.getPosition().getyCoordinate(), 50,
+					60, null);
+			return;
+		}
 		if (characters.getDirectional().equalsIgnoreCase("down")) {
 			img = new ImageIcon(getClass().getResource(ImageDAO.bomber_down)).getImage();
 			g.drawImage(img, characters.getPosition().getxCoordinate(), characters.getPosition().getyCoordinate(),

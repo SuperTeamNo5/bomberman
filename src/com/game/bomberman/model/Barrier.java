@@ -5,6 +5,7 @@ public abstract class Barrier {
 	protected Position position;
 	protected final int width = 50;
 	protected final int height = 50;
+	protected boolean canDestroy;
 
 	public Barrier(String name, Position position) {
 		super();
@@ -26,5 +27,9 @@ public abstract class Barrier {
 
 	public int getHeight() {
 		return height;
+	}
+
+	public boolean isCanDestroy() {
+		return canDestroy;
 	}
 }

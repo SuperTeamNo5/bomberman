@@ -18,12 +18,12 @@ public class RunGame {
 
 		Map map = new MapLv1(player);
 
-		map.getBar().remove(1);
-		map.getBar().remove(1);
-		map.getBar().remove(1);
-		map.getBar().remove(1);
-		map.getBar().remove(1);
-		map.getBar().remove(1);
+//		map.getBar().remove(1);
+//		map.getBar().remove(1);
+//		map.getBar().remove(1);
+//		map.getBar().remove(1);
+//		map.getBar().remove(1);
+//		map.getBar().remove(1);
 
 		Action act = new Action(map);
 		act.setMusicDAO(musicDAO);
@@ -40,4 +40,10 @@ public class RunGame {
 		game.addKeyListener(key);
 	}
 
+<<<<<<< HEAD
+	public static void main(String[] args) {
+		new RunGame();
+	}
+=======
+>>>>>>> fd64fbf61459e193b72c9f68585ed7e5fcb3f67e
 }

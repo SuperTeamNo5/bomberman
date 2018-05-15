@@ -37,12 +37,12 @@ public class BarrierView extends JPanel {
 	public void imgDown(Graphics g) {
 		switch (name) {
 		case "barrel":
-			img = new ImageIcon(getClass().getResource(ImageDAO.box1)).getImage();
+			img = new ImageIcon(getClass().getResource(ImageDAO.box2)).getImage();
 			g.drawImage(img, bar.getPosition().getxCoordinate(), bar.getPosition().getyCoordinate(), bar.getWidth(),
 					bar.getHeight(), null);
 			break;
 		case "wall":
-			img = new ImageIcon(getClass().getResource(ImageDAO.box2)).getImage();
+			img = new ImageIcon(getClass().getResource(ImageDAO.box1)).getImage();
 			g.drawImage(img, bar.getPosition().getxCoordinate(), bar.getPosition().getyCoordinate(), bar.getWidth(),
 					bar.getHeight(), null);
 			break;
@@ -55,14 +55,14 @@ public class BarrierView extends JPanel {
 	public void imgUp(Graphics g) throws IOException {
 		switch (name) {
 		case "barrel":
-			img = new ImageIcon(getClass().getResource(ImageDAO.box11)).getImage();
-			g.drawImage(img, bar.getPosition().getxCoordinate(), bar.getPosition().getyCoordinate() - 15,
-					bar.getWidth(), 15, null);
+			img = new ImageIcon(getClass().getResource(ImageDAO.box22)).getImage();
+			g.drawImage(img, bar.getPosition().getxCoordinate(), bar.getPosition().getyCoordinate() - 5,
+					bar.getWidth(), 5, null);
 			break;
 		case "wall":
-			img = new ImageIcon(getClass().getResource(ImageDAO.box22)).getImage();
-			g.drawImage(img, bar.getPosition().getxCoordinate(), bar.getPosition().getyCoordinate() - 5, bar.getWidth(),
-					5, null);
+			img = new ImageIcon(getClass().getResource(ImageDAO.box11)).getImage();
+			g.drawImage(img, bar.getPosition().getxCoordinate(), bar.getPosition().getyCoordinate() - 15, bar.getWidth(),
+					15, null);
 			break;
 
 		default:

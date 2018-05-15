@@ -1,6 +1,7 @@
 package com.game.bomberman.view;
 
 import java.awt.Graphics;
+import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,8 +12,11 @@ import javax.swing.JPanel;
 
 import com.game.bomberman.controller.Action;
 import com.game.bomberman.controller.MonsAction;
+import com.game.bomberman.model.Barrier;
 import com.game.bomberman.model.Loot;
 import com.game.bomberman.model.Map;
+import com.game.bomberman.model.Monster;
+import com.game.bomberman.model.Player;
 
 import DAO.ImageDAO;
 
@@ -36,8 +40,8 @@ public class ViewGame extends JPanel implements Runnable {
 	public ViewGame(Map map, Action act, MonsAction monsAct) {
 		this.map = map;
 		this.viewMan = createViewMan();
-		this.barView = createBarrierView();
-		this.monView = createMonsterView();
+		this.barView = createBarrierView(map.getBar());
+		this.monView = createMonsterView(map.getMons());
 		this.lootView = createLootView(map.getLoot());
 		this.act = act;
 		this.monsAct = monsAct;
@@ -91,21 +95,21 @@ public class ViewGame extends JPanel implements Runnable {
 		}
 	}
 
-	public List<BarrierView> createBarrierView() {
+	public List<BarrierView> createBarrierView(List<Barrier> bar) {
 		List<BarrierView> arr = new ArrayList<>();
 		BarrierView barrView;
-		for (int i = 0; i < map.getBar().size(); i++) {
+		for (int i = 0; i < bar.size(); i++) {
 			barrView = new BarrierView(map.getBar().get(i));
 			arr.add(barrView);
 		}
 		return arr;
 	}
 
-	public List<MonsterView> createMonsterView() {
+	public List<MonsterView> createMonsterView(List<Monster> mon) {
 		List<MonsterView> arr = new ArrayList<>();
 		MonsterView MonView;
-		for (int i = 0; i < map.getMons().size(); i++) {
-			MonView = new MonsterView(map.getMons().get(i));
+		for (int i = 0; i < mon.size(); i++) {
+			MonView = new MonsterView(mon.get(i));
 			arr.add(MonView);
 		}
 		return arr;
@@ -152,16 +156,20 @@ public class ViewGame extends JPanel implements Runnable {
 		while (isRunning) {
 			repaint();
 			act.updateChar();
-			setLootView(act.collisionPlayerVsLoot());
+			setBarView(act.getBar());
+			setMonView(act.getMons());
 			act.collisionPlayerVsMons();
 			act.updateMap();
 			monsAct.updateMons();
+			setLootView(act.collisionPlayerVsLoot());
+//			System.out.println("Diem cao: " + act.getPlayer().getScore());
 
 			long deltaTime = System.nanoTime() - beginTime;
 			sleepTime = period - deltaTime;
-			 if (act.charDead()) {
-			 break;
-			 }
+			if (act.charDead()) {
+				System.out.println("End game");
+				break;
+			}
 
 			try {
 				// if (sleepTime > 0) {
@@ -192,16 +200,16 @@ public class ViewGame extends JPanel implements Runnable {
 		return barView;
 	}
 
-	public void setBarView(List<BarrierView> barView) {
-		this.barView = barView;
+	public void setBarView(List<Barrier> bar) {
+		this.barView = createBarrierView(bar);
 	}
 
 	public List<MonsterView> getMonView() {
 		return monView;
 	}
 
-	public void setMonView(List<MonsterView> monView) {
-		this.monView = monView;
+	public void setMonView(List<Monster> mon) {
+		this.monView = createMonsterView(mon);
 	}
 
 	public List<LootView> getLootView() {
@@ -211,6 +219,8 @@ public class ViewGame extends JPanel implements Runnable {
 	public void setLootView(List<Loot> loot) {
 		this.lootView = createLootView(loot);
 	}
+<<<<<<< HEAD
+=======
 	
 //	public List<LootView> getLootView() {
 //		return lootView;
@@ -220,5 +230,6 @@ public class ViewGame extends JPanel implements Runnable {
 //		this.lootView = lootView;
 //	}
 
+>>>>>>> fd64fbf61459e193b72c9f68585ed7e5fcb3f67e
 
 }
