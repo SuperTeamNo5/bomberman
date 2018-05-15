@@ -1,9 +1,9 @@
 package com.game.bomberman.model;
 
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
 public class Music {
 	private String name;
@@ -11,6 +11,8 @@ public class Music {
 	private AudioInputStream audioIn;
 	private Clip clip;
 	private boolean openation = true;
+	private float volume = 0f;
+	private FloatControl control ;
 
 	public Music(String name, String path) {
 		super();
@@ -25,9 +27,14 @@ public class Music {
 				audioIn = AudioSystem.getAudioInputStream(getClass().getResource(path));
 				clip = AudioSystem.getClip();
 				clip.open(audioIn);
+				control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+
+			if (volume != 0f) {
+				control.setValue(volume);
 			}
 
 			clip.start();
@@ -61,6 +68,10 @@ public class Music {
 
 	public void setOpenation(boolean openation) {
 		this.openation = openation;
+	}
+
+	public void setVolume(float volume) {
+		this.volume = volume;
 	}
 
 }

@@ -75,10 +75,14 @@ public class MusicDAO {
 		addSound(new Music("Music Detroy monster", MusicDAO.DETROY_MONSTER));
 		addSound(new Music("Music Drop Boom", MusicDAO.DROP_BOOM));
 		addSound(new Music("Music Pick up loot", MusicDAO.PICK_UP_LOOT));
+		listSound.get(0).setVolume(-12f);
+		listSound.get(1).setVolume(-12f);
 		// add Music
 		addMusic(new Music("Music Background", MusicDAO.BACKGROUND_MUSIC));
 		addMusic(new Music("Music Map1", MusicDAO.MAP1_MUSIC));
 		addMusic(new Music("Music Out Game", MusicDAO.OUT_GAME));
+		listMusic.get(0).setVolume(-12f);
+		listMusic.get(1).setVolume(-12f);
 	}
 
 	public ArrayList<Music> getListMusic() {
