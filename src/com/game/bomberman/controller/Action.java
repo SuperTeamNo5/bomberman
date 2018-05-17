@@ -24,7 +24,7 @@ public class Action {
 	private Map map;
 	private ViewGame view;
 	MusicDAO musicDAO;
-	
+
 	public MusicDAO getMusicDAO() {
 		return musicDAO;
 	}
@@ -114,8 +114,9 @@ public class Action {
 		// int y = chara.getPosition().getyCoordinate();
 		if (chara.getBag().search("bombItem").getQuatity() > 0) {
 			musicDAO.getListSound().get(5).playSound(false);
-			Loot bomb = new Boom("bomb", new Position((x / 50) * 50, (y / 50) * 50), 500);
+			Loot bomb = new Boom(new Position((x / 50) * 50, (y / 50) * 50));
 			loot.add(bomb);
+			setSizeBomb((Boom) bomb);
 			chara.getBag().search("bombItem").setQuatity(chara.getBag().search("bombItem").getQuatity() - 1);
 		}
 		// map.setLoot(loot);
@@ -131,9 +132,9 @@ public class Action {
 			if (loot.get(i).getName().equalsIgnoreCase("bomb") || loot.get(i).getName().equalsIgnoreCase("bombang")) {
 				if (loot.get(i).getName().equalsIgnoreCase("bombang")) {
 					Boom bomb = (Boom) loot.get(i);
-					setSizeBomb(bomb);
-					bombangvsBox(bomb);
-					bombangvsMonsVsBomber(bomb);
+					System.out.println("sizebom: " + bomb.getBombang_left() + bomb.getBombang_right()
+							+ bomb.getBombang_up() + bomb.getBombang_down());
+					bombangvsMonsVsBomberVsBar(bomb);
 				}
 			} else {
 				rec2 = new Rectangle(loot.get(i).getPositon().getxCoordinate() + 10,
@@ -201,8 +202,7 @@ public class Action {
 		return false;
 	}
 
-	public void bombangvsBox(Boom bomb) {
-		// setSizeBomb(bomb);
+	public void setSizebombangvsBox(Boom bomb) {
 		Rectangle rec_right = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(),
 				45 + 45 * bomb.getBombang_right(), 45);
 		Rectangle rec_left = new Rectangle(bomb.getPositon().getxCoordinate() - (45 * bomb.getBombang_left()),
@@ -215,45 +215,34 @@ public class Action {
 			Barrier barrier = bar.get(i);
 			Rectangle rec_Box = new Rectangle(barrier.getPosition().getxCoordinate(),
 					barrier.getPosition().getyCoordinate(), 50, 50);
-			if (rec_Box.intersects(rec_up) || rec_Box.intersects(rec_down) || rec_Box.intersects(rec_left)
-					|| rec_Box.intersects(rec_right)) {
-				if (bar.get(i).isCanDestroy()) {
-					bar.remove(i);
-				}
+			// if (rec_Box.intersects(rec_up) || rec_Box.intersects(rec_down) ||
+			// rec_Box.intersects(rec_left)
+			// || rec_Box.intersects(rec_right)) {
+			// if (bar.get(i).isCanDestroy()) {
+			// bar.remove(i);
+			// }
+			// }
+			// setLeft
+			if (rec_Box.intersects(rec_left)) {
+				int size = (rec_left.width - (rec_Box.x - rec_left.x)) / 50;
+				bomb.setBombang_left(size);
 			}
-			// if (rec_Box.intersects(rec_up)) {
-			// if (bar.get(i).isCanDestroy()) {
-			// int size = (rec_up.height - (rec_Box.y - rec_up.y)) / 50;
-			// bomb.setBombang_up(size);
-			// bar.remove(i);
-			// }
-			// }
-			// if (rec_Box.intersects(rec_down)) {
-			// if (bar.get(i).isCanDestroy()) {
-			// int size = (rec_Box.y - rec_down.y) / 50;
-			// bomb.setBombang_down(size);
-			// bar.remove(i);
-			// }
-			// }
-			// if (rec_Box.intersects(rec_right)) {
-			// if (bar.get(i).isCanDestroy()) {
-			// int size = ((rec_Box.x - rec_right.x)) / 50;
-			// bomb.setBombang_right(size);
-			//// rec_right.
-			// bar.remove(i);
-			// }
-			// }
-			// if (rec_Box.intersects(rec_left)) {
-			// if (bar.get(i).isCanDestroy()) {
-			// int size = (rec_left.width - (rec_Box.x - rec_left.x)) / 50;
-			// bomb.setBombang_left(size);
-			// bar.remove(i);
-			// }
-			// }
+			if (rec_Box.intersects(rec_right)) {
+				int size = ((rec_Box.x - rec_right.x) - 50) / 50;
+				bomb.setBombang_right(size);
+			}
+			if (rec_Box.intersects(rec_up)) {
+				int size = (rec_up.height - (rec_Box.y - rec_up.y)) / 50;
+				bomb.setBombang_up(size);
+			}
+			if (rec_Box.intersects(rec_down)) {
+				int size = (rec_Box.y - rec_down.y) / 50;
+				bomb.setBombang_down(size);
+			}
 		}
 	}
 
-	public void bombangvsMonsVsBomber(Boom bomb) {
+	public void bombangvsMonsVsBomberVsBar(Boom bomb) {
 		Rectangle rec_right = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(),
 				45 + 45 * bomb.getBombang_right(), 45);
 		Rectangle rec_left = new Rectangle(bomb.getPositon().getxCoordinate() - 45, bomb.getPositon().getyCoordinate(),
@@ -270,6 +259,17 @@ public class Action {
 					|| rec_Mons.intersects(rec_right)) {
 				mons.remove(i);
 				player.setScore(player.getScore() + 10);
+			}
+		}
+		for (int i = 0; i < bar.size(); i++) {
+			Barrier barrier = bar.get(i);
+			Rectangle rec_Box = new Rectangle(barrier.getPosition().getxCoordinate(),
+					barrier.getPosition().getyCoordinate(), 50, 50);
+			if (rec_Box.intersects(rec_up) || rec_Box.intersects(rec_down) || rec_Box.intersects(rec_left)
+					|| rec_Box.intersects(rec_right)) {
+				if (barrier.isCanDestroy()) {
+					bar.remove(i);
+				}
 			}
 		}
 		Characters characters = player.getCharacter();
@@ -298,7 +298,9 @@ public class Action {
 		bomb.setBombang_left(player.getCharacter().getBag().search("soda").getQuatity());
 		bomb.setBombang_right(player.getCharacter().getBag().search("soda").getQuatity());
 		bomb.setBombang_up(player.getCharacter().getBag().search("soda").getQuatity());
-//		return bomb;
+		// setSizeBomb(bomb);
+		setSizebombangvsBox(bomb);
+		// return bomb;
 	}
 
 }

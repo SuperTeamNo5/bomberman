@@ -29,15 +29,15 @@ public class MapLv1 extends Map {
 		// create position of wall
 		for (int i = 0; i < positions.size(); i++) {
 			FactoryBarrier wallFactory = new FactoryBarrier();
-//			if (o % 2 == 0) {
-//				bar.add(wallFactory.createBarrier("wall", positions.get(i)));
-//			} else {
+			if (o % 2 == 0) {
+				bar.add(wallFactory.createBarrier("wall", positions.get(i)));
+			} else {
 				bar.add(wallFactory.createBarrier("barrel", positions.get(i)));
 			}
-//			if (i % 6 == 0) {
-//				o += 1;
-//			}
-//		}
+			if (i % 6 == 0) {
+				o += 1;
+			}
+		}
 		// create position of player
 		// Player a = new Player("Han", 0, new Characters("bongmo", "down", new
 		// Position(0, 587), new Bag(), 1));

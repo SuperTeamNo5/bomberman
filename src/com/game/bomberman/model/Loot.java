@@ -24,6 +24,11 @@ public abstract class Loot {
 		this.positon = positon;
 	}
 
+	public Loot(Position positon) {
+		super();
+		this.positon = positon;
+	}
+
 	public String getName() {
 		return name;
 	}
