@@ -11,7 +11,7 @@ import DAO.ImageDAO;
 @SuppressWarnings("serial")
 public class MenuView extends JMenuBar {
 	private JMenu mnuFile, mnuIfor, mnuHelp;
-	private JMenuItem mniFresh, mniExit, mniSave, mniLoad, inforAuthor;
+	private JMenuItem mniExit, mniLoad, mniInforAuthor,mniHelp;
 
 	public MenuView() {
 		setMenuBar();
@@ -22,16 +22,6 @@ public class MenuView extends JMenuBar {
 		mnuFile = new JMenu("File");
 		mnuFile.setIcon(new ImageIcon(getClass().getResource(ImageDAO.fileIcon)));
 		// mnuFile.setMnemonic(KeyEvent.VK_F);
-
-//		mniFresh = new JMenuItem("New game");
-//		mniFresh.setIcon(new ImageIcon(getClass().getResource(ImageDAO.refreshIcon)));
-//		mniFresh.setEnabled(false);
-//		mnuFile.add(mniFresh);
-//
-//		mniSave = new JMenuItem("Save game");
-//		mniSave.setIcon(new ImageIcon(getClass().getResource(ImageDAO.saveIcon)));
-//		mniSave.setEnabled(false);
-//		mnuFile.add(mniSave);
 
 		mniLoad = new JMenuItem("Load game");
 		mniLoad.setIcon(new ImageIcon(getClass().getResource(ImageDAO.loadIcon)));
@@ -44,13 +34,15 @@ public class MenuView extends JMenuBar {
 
 		mnuIfor = new JMenu("About");
 		mnuIfor.setIcon(new ImageIcon(getClass().getResource(ImageDAO.mailIcon)));
+		mniInforAuthor = new JMenuItem("Contract");
+		mniInforAuthor.setIcon(new ImageIcon(getClass().getResource(ImageDAO.communicationIcon)));
+		mnuIfor.add(mniInforAuthor);
 
 		mnuHelp = new JMenu("Help");
 		mnuHelp.setIcon(new ImageIcon(getClass().getResource(ImageDAO.helpIcon)));
-
-		inforAuthor = new JMenuItem("Contract");
-		inforAuthor.setIcon(new ImageIcon(getClass().getResource(ImageDAO.communicationIcon)));
-		mnuIfor.add(inforAuthor);
+		mniHelp = new JMenuItem("Help");
+		mniHelp.setIcon(new ImageIcon(getClass().getResource(ImageDAO.helpIcon)));
+		mnuHelp.add(mniHelp);
 
 		add(mnuFile);
 		add(mnuHelp);
@@ -112,15 +104,20 @@ public class MenuView extends JMenuBar {
 	public void setMniLoad(JMenuItem mniLoad) {
 		this.mniLoad = mniLoad;
 	}
-
-	public JMenuItem getInforAuthor() {
-		return inforAuthor;
+	public JMenuItem getmniInforAuhor() {
+		return mniInforAuthor;
 	}
 
-	public void setInforAuthor(JMenuItem inforAuthor) {
-		this.inforAuthor = inforAuthor;
+	public void setmniInforAuhor(JMenuItem mniInforAuthor) {
+		this.mniInforAuthor = mniInforAuthor;
+	}
+
+	public JMenuItem getMniHelp() {
+		return mniHelp;
+	}
+
+	public void setMniHelp(JMenuItem mniHelp) {
+		this.mniHelp = mniHelp;
 	}
 	
-	
-
 }
