@@ -12,9 +12,10 @@ public class Boom extends Loot {
 		super(name, positon);
 	}
 
-	public Boom(String name, Position positon, int deadLine) {// use for boom
-		super(name, positon);
-		this.deadLine = deadLine;
+	public Boom(Position positon) {// use for bomb
+		super(positon);
+		this.name = "bomb";
+		this.deadLine = 200;
 		this.bombang_down = 1;
 		this.bombang_left = 1;
 		this.bombang_right = 1;

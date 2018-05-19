@@ -162,7 +162,7 @@ public class ViewGame extends JPanel implements Runnable {
 			act.updateMap();
 			monsAct.updateMons();
 			setLootView(act.collisionPlayerVsLoot());
-//			System.out.println("Diem cao: " + act.getPlayer().getScore());
+			// System.out.println("Diem cao: " + act.getPlayer().getScore());
 
 			long deltaTime = System.nanoTime() - beginTime;
 			sleepTime = period - deltaTime;
@@ -219,4 +219,8 @@ public class ViewGame extends JPanel implements Runnable {
 	public void setLootView(List<Loot> loot) {
 		this.lootView = createLootView(loot);
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 432deef9b8f06f462c32c7e7d7be8ac108191d08
 }
