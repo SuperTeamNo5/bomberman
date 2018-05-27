@@ -1,5 +1,8 @@
 package com.game.bomberman.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.game.bomberman.model.Bag;
 import com.game.bomberman.model.Characters;
 import com.game.bomberman.model.Map;
@@ -13,25 +16,27 @@ import DAO.MusicDAO;
 
 public class RunGame {
 
-	public RunGame(MusicDAO musicDAO) {
-		Player player = new Player("Han", 0, new Characters("bongmo", "down", new Position(0, 0), new Bag(), 0, 0));
+	public RunGame(String name, MusicDAO musicDAO) {
+		Player player = new Player(name, 0, new Characters("bongmo", "down", new Position(0, 0), new Bag(), 0, 0));
 
 		Map map = new MapLv1(player);
 
-//		map.getBar().remove(1);
-//		map.getBar().remove(1);
-//		map.getBar().remove(1);
-//		map.getBar().remove(1);
-//		map.getBar().remove(1);
-//		map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
 
-		Action act = new Action(map);
+		Action act = new Action(map,map.getPlayer1());
 		act.setMusicDAO(musicDAO);
 		MonsAction monsAct = new MonsAction(map);
 
-		ViewGame view = new ViewGame(map, act, monsAct);
+		List<Action> actList = new ArrayList<>();
+		actList.add(act);
+		ViewGame view = new ViewGame(map, actList, monsAct);
 
-		KeyBoard key = new KeyBoard(map.getPlayer().getCharacter(), act);
+		KeyBoard key = new KeyBoard(map.getPlayer1().getCharacter(), actList);
 
 		MainViewOfGame game = new MainViewOfGame(view);
 		game.startGame();
@@ -39,8 +44,37 @@ public class RunGame {
 		game.setLocationRelativeTo(null);
 		game.addKeyListener(key);
 	}
-//
-//	public static void main(String[] args) {
-//		new RunGame();
-//	}
+
+	public RunGame(String name1, String name2, MusicDAO musicDAO) {
+		Player player1 = new Player(name1, 0, new Characters("bongmo", "down", new Position(0, 0), new Bag(), 0, 0));
+		Player player2 = new Player(name2, 0, new Characters("bongmo", "down", new Position(0, 0), new Bag(), 0, 0));
+
+		Map map = new MapLv1(player1, player2);
+
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		List<Action> actList = new ArrayList<>();
+		Action act = new Action(map, map.getPlayer1());
+		Action act1 = new Action(map, map.getPlayer2());
+		act.setMusicDAO(musicDAO);
+		act1.setMusicDAO(musicDAO);
+		actList.add(act);
+		actList.add(act1);
+		MonsAction monsAct = new MonsAction(map);
+
+		ViewGame view = new ViewGame(map, actList, monsAct);
+
+		KeyBoard key = new KeyBoard(map.getPlayer1().getCharacter(),map.getPlayer2().getCharacter(), actList);
+
+		MainViewOfGame game = new MainViewOfGame(view);
+		game.startGame();
+		game.setVisible(true);
+		game.setLocationRelativeTo(null);
+		game.addKeyListener(key);
+	}
+
 }

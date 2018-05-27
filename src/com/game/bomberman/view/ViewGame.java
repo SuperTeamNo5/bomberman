@@ -22,9 +22,10 @@ import DAO.ImageDAO;
 
 @SuppressWarnings("serial")
 public class ViewGame extends JPanel implements Runnable {
-	private CharactersView viewMan;
+	private CharactersView viewMan, viewMan2;
 
-	private Action act;
+	private List<Action> act;
+	private Action ac;
 	private MonsAction monsAct;
 
 	private List<BarrierView> barView;
@@ -37,11 +38,13 @@ public class ViewGame extends JPanel implements Runnable {
 
 	private boolean isRunning = false;
 
-	public ViewGame(Map map, Action act, MonsAction monsAct) {
+	public ViewGame(Map map, List<Action> act, MonsAction monsAct) {
 		this.map = map;
-		this.viewMan = createViewMan();
+		createViewMan();
 		this.barView = createBarrierView(map.getBar());
+		// if (map.getType() == 1) {
 		this.monView = createMonsterView(map.getMons());
+		// }
 		this.lootView = createLootView(map.getLoot());
 		this.act = act;
 		this.monsAct = monsAct;
@@ -55,10 +58,13 @@ public class ViewGame extends JPanel implements Runnable {
 		dislayBackroundGame(g);
 		displayLootView(g);
 		displayBarrierViewDown(g);
+		// if (map.getType() == 1) {
 		displayMonsterView(g);
+		// }
 		dislayViewMan(g);
 		displayBarrierViewUp(g);
-		System.out.println("Tgian: " + ((System.nanoTime() - begintime) / 1000000));
+		// System.out.println("Tgian: " + ((System.nanoTime() - begintime) /
+		// 1000000));
 	}
 
 	// display backround
@@ -76,11 +82,19 @@ public class ViewGame extends JPanel implements Runnable {
 	// display chacracter
 	public void dislayViewMan(Graphics g) {
 		viewMan.paint(g);
+		if (map.getType() == 2) {
+			viewMan2.paint(g);
+		}
 	}
 
-	public CharactersView createViewMan() {
-		System.out.println("y: " + map.getPlayer().getCharacter().getPosition().getyCoordinate());
-		return new CharactersView(map.getPlayer().getCharacter());
+	public void createViewMan() {
+		// System.out.println("y: " +
+		// map.getPlayer1().getCharacter().getPosition().getyCoordinate());
+		this.viewMan = new CharactersView(map.getPlayer1().getCharacter());
+		if (map.getType() == 2) {
+			this.viewMan2 = new CharactersView(map.getPlayer2().getCharacter());
+			// return new CharactersView(map.getPlayer1().getCharacter());
+		}
 	}
 
 	public void displayBarrierViewUp(Graphics g) {
@@ -153,31 +167,39 @@ public class ViewGame extends JPanel implements Runnable {
 		long sleepTime;
 
 		beginTime = System.nanoTime();
-		while (isRunning) {
+		abc: while (isRunning) {
 			repaint();
-			act.updateChar();
-			setBarView(act.getBar());
-			setMonView(act.getMons());
-			act.collisionPlayerVsMons();
-			act.updateMap();
-			monsAct.updateMons();
-			setLootView(act.collisionPlayerVsLoot());
-			// System.out.println("Diem cao: " + act.getPlayer().getScore());
+			for (int i = 0; i < act.size(); i++) {
+				ac = act.get(i);
+				ac.updateChar();
+				setBarView(ac.getBar());
+				// if (map.getType() == 1) {
+				setMonView(ac.getMons());
+				ac.collisionPlayerVsMons();
+				// }
+				ac.updateMap();
+				// if (map.getType() == 1) {
+				monsAct.updateMons();
+				// }
+				setLootView(ac.collisionPlayerVsLoot());
+				// System.out.println("Diem cao: " +
+				// act.getPlayer().getScore());
 
-			long deltaTime = System.nanoTime() - beginTime;
-			sleepTime = period - deltaTime;
-			if (act.charDead()) {
-				System.out.println("End game");
-				break;
+				long deltaTime = System.nanoTime() - beginTime;
+				sleepTime = period - deltaTime;
+				if (ac.charDead()) {
+					System.out.println("End game");
+					break abc;
+				}
+
 			}
-
 			try {
 				// if (sleepTime > 0) {
 				// Thread.sleep(sleepTime / 1000000);
 				// } else {
 				// Thread.sleep(period / 2000000);
 				// }
-				Thread.sleep(10);
+				Thread.sleep(15);
 			} catch (InterruptedException e) {
 				beginTime = System.nanoTime();
 			}

@@ -78,7 +78,9 @@ public class OnePlayerController implements MouseListener {
 			musicDAO.getListMusic().get(0).stopSound();
 			musicDAO.getListMusic().get(1).playSound(true);
 			frame.setVisible(false);
-			gameView = new RunGame(musicDAO);
+			String name = playerPanel.getTxtName().getText();
+			gameView = new RunGame("han","shika", musicDAO);
+			System.out.println("Ten nv: "+name);
 			// frame.repaint();
 		}
 	}

@@ -86,7 +86,7 @@ public class Characters implements Move {
 		Loot loot;
 		loot = new Boom("bombItem", 1);
 		getBag().add(loot);
-		loot = new Shoes("shoes", 2);
+		loot = new Shoes("shoes", 1);
 		getBag().add(loot);
 		loot = new Soda("soda", 2);
 		getBag().add(loot);

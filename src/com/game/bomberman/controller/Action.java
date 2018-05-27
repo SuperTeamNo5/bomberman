@@ -33,9 +33,9 @@ public class Action {
 		this.musicDAO = musicDAO;
 	}
 
-	public Action(Map map) {
+	public Action(Map map, Player player) {
 		this.map = map;
-		this.player = map.getPlayer();
+		this.player = player;
 		this.bar = map.getBar();
 		this.loot = map.getLoot();
 		this.mons = map.getMons();
@@ -114,7 +114,7 @@ public class Action {
 		// int y = chara.getPosition().getyCoordinate();
 		if (chara.getBag().search("bombItem").getQuatity() > 0) {
 			musicDAO.getListSound().get(5).playSound(false);
-			Loot bomb = new Boom(new Position((x / 50) * 50, (y / 50) * 50));
+			Loot bomb = new Boom(new Position((x / 50) * 50, (y / 50) * 50), player.getName());
 			loot.add(bomb);
 			setSizeBomb((Boom) bomb);
 			chara.getBag().search("bombItem").setQuatity(chara.getBag().search("bombItem").getQuatity() - 1);
@@ -184,10 +184,13 @@ public class Action {
 			} else {
 				if (loot.get(i).getName().equalsIgnoreCase("bombang")) {
 					lo = (Boom) loot.get(i);
+					String name = lo.getBombOf();
 					if (boomBang(lo) == true) {
-						loot.remove(i);
-						chara.getBag().search("bombItem")
-								.setQuatity(chara.getBag().search("bombItem").getQuatity() + 1);
+						if (name.equalsIgnoreCase(player.getName())) {
+							chara.getBag().search("bombItem")
+									.setQuatity(chara.getBag().search("bombItem").getQuatity() + 1);
+							loot.remove(i);
+						}
 					}
 				}
 			}
@@ -204,13 +207,13 @@ public class Action {
 
 	public void setSizebombangvsBox(Boom bomb) {
 		Rectangle rec_right = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(),
-				45 + 45 * bomb.getBombang_right(), 45);
+				45 + (45 * bomb.getBombang_right()), 45);
 		Rectangle rec_left = new Rectangle(bomb.getPositon().getxCoordinate() - (45 * bomb.getBombang_left()),
-				bomb.getPositon().getyCoordinate(), 45 + 45 * bomb.getBombang_left(), 45);
+				bomb.getPositon().getyCoordinate(), 45 + (45 * bomb.getBombang_left()), 45);
 		Rectangle rec_down = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(), 45,
-				45 + 45 * bomb.getBombang_down());
+				45 + (45 * bomb.getBombang_down()));
 		Rectangle rec_up = new Rectangle(bomb.getPositon().getxCoordinate(),
-				bomb.getPositon().getyCoordinate() - (45 * bomb.getBombang_up()), 45, 45 + 45 * bomb.getBombang_up());
+				bomb.getPositon().getyCoordinate() - (45 * bomb.getBombang_up()), 45, 45 + (45 * bomb.getBombang_up()));
 		for (int i = 0; i < bar.size(); i++) {
 			Barrier barrier = bar.get(i);
 			Rectangle rec_Box = new Rectangle(barrier.getPosition().getxCoordinate(),
@@ -225,40 +228,67 @@ public class Action {
 			// setLeft
 			if (rec_Box.intersects(rec_left)) {
 				int size = (rec_left.width - (rec_Box.x - rec_left.x)) / 50;
-				bomb.setBombang_left(size);
+				if (bomb.getBombang_left() > size) {
+					bomb.setBombang_left(size);
+				}
 			}
 			if (rec_Box.intersects(rec_right)) {
-				int size = ((rec_Box.x - rec_right.x) - 50) / 50;
-				bomb.setBombang_right(size);
+				int size = ((rec_Box.x - rec_right.x)) / 50;
+				if (bomb.getBombang_right() > size) {
+					bomb.setBombang_right(size);
+				}
 			}
 			if (rec_Box.intersects(rec_up)) {
 				int size = (rec_up.height - (rec_Box.y - rec_up.y)) / 50;
-				bomb.setBombang_up(size);
+				if (bomb.getBombang_up() > size) {
+					bomb.setBombang_up(size);
+				}
 			}
 			if (rec_Box.intersects(rec_down)) {
 				int size = (rec_Box.y - rec_down.y) / 50;
-				bomb.setBombang_down(size);
+				if (bomb.getBombang_down() > size) {
+					bomb.setBombang_down(size);
+				}
 			}
 		}
 	}
 
 	public void bombangvsMonsVsBomberVsBar(Boom bomb) {
+		// System.out.println("//////////////////////" + bomb.getBombang_left()
+		// + bomb.getBombang_right()
+		// + bomb.getBombang_up() + bomb.getBombang_down());
 		Rectangle rec_right = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(),
-				45 + 45 * bomb.getBombang_right(), 45);
-		Rectangle rec_left = new Rectangle(bomb.getPositon().getxCoordinate() - 45, bomb.getPositon().getyCoordinate(),
-				45 + 45 * bomb.getBombang_left(), 45);
+				45 + (45 * bomb.getBombang_right()), 45);
+		Rectangle rec_left = new Rectangle(bomb.getPositon().getxCoordinate() - (45 * bomb.getBombang_left()),
+				bomb.getPositon().getyCoordinate(), 45 + (45 * bomb.getBombang_left()), 45);
 		Rectangle rec_down = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(), 45,
-				45 + 45 * bomb.getBombang_down());
-		Rectangle rec_up = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate() - 45,
-				45, 45 + 45 * bomb.getBombang_up());
+				45 + (45 * bomb.getBombang_down()));
+		Rectangle rec_up = new Rectangle(bomb.getPositon().getxCoordinate(),
+				bomb.getPositon().getyCoordinate() - (45 * bomb.getBombang_up()), 45, 45 + (45 * bomb.getBombang_up()));
 		for (int i = 0; i < mons.size(); i++) {
 			Monster mon = mons.get(i);
 			Rectangle rec_Mons = new Rectangle(mon.getPosition().getxCoordinate(), mon.getPosition().getyCoordinate(),
 					45, 55);
 			if (rec_Mons.intersects(rec_up) || rec_Mons.intersects(rec_down) || rec_Mons.intersects(rec_left)
 					|| rec_Mons.intersects(rec_right)) {
-				mons.remove(i);
-				player.setScore(player.getScore() + 10);
+				if (player.getName().equalsIgnoreCase(bomb.getBombOf())) {
+					mons.remove(i);
+					player.setScore(player.getScore() + 10);
+					System.out.println("Diem cua " + player.getName() + " ne:...." + player.getScore());
+				}
+			}
+		}
+		Boom lo;
+		for (int i = 0; i < loot.size(); i++) {
+			if (loot.get(i).getName().equalsIgnoreCase("bomb")) {
+				// lo = loot.get(i);
+				Rectangle rec_bomb = new Rectangle(loot.get(i).getPositon().getxCoordinate(),
+						loot.get(i).getPositon().getyCoordinate(), 45, 55);
+				if (rec_bomb.intersects(rec_up) || rec_bomb.intersects(rec_down) || rec_bomb.intersects(rec_left)
+						|| rec_bomb.intersects(rec_right)) {
+					lo = (Boom) loot.get(i);
+					lo.setDeadLine(15);
+				}
 			}
 		}
 		for (int i = 0; i < bar.size(); i++) {
@@ -267,14 +297,15 @@ public class Action {
 					barrier.getPosition().getyCoordinate(), 50, 50);
 			if (rec_Box.intersects(rec_up) || rec_Box.intersects(rec_down) || rec_Box.intersects(rec_left)
 					|| rec_Box.intersects(rec_right)) {
+				System.out.println("va cham");
 				if (barrier.isCanDestroy()) {
 					bar.remove(i);
 				}
 			}
 		}
 		Characters characters = player.getCharacter();
-		Rectangle rec_Char = new Rectangle(characters.getPosition().getxCoordinate(),
-				characters.getPosition().getyCoordinate(), characters.getWidth(), characters.getHeight());
+		Rectangle rec_Char = new Rectangle(characters.getPosition().getxCoordinate() + 5,
+				characters.getPosition().getyCoordinate() + 15, 30, 20);
 		if (rec_Char.intersects(rec_up) || rec_Char.intersects(rec_down) || rec_Char.intersects(rec_left)
 				|| rec_Char.intersects(rec_right)) {
 			characters.setCollisionVsBomb(true);

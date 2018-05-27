@@ -2,6 +2,7 @@ package com.game.bomberman.view;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;

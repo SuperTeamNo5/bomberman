@@ -7,14 +7,26 @@ public abstract class Map {
 	protected List<Monster> mons;
 	protected List<Barrier> bar;
 	protected List<Loot> loot;
-	protected Player player;
+	protected Player player1, player2;
+	protected int type;
 
-	public Map(Player player) {
+	public Map(Player player1) {
 		super();
+		this.type = 1;
 		this.mons = new ArrayList<>();
 		this.bar = new ArrayList<>();
 		this.loot = new ArrayList<>();
-		this.player = player;
+		this.player1 = player1;
+	}
+
+	public Map(Player player1, Player player2) {
+		super();
+		this.type = 2;
+		this.mons = new ArrayList<>();
+		this.bar = new ArrayList<>();
+		this.loot = new ArrayList<>();
+		this.player1 = player1;
+		this.player2 = player2;
 	}
 
 	public List<Monster> getMons() {
@@ -41,13 +53,49 @@ public abstract class Map {
 		this.loot = loot;
 	}
 
-	public Player getPlayer() {
-		return player;
+	public Player getPlayer1() {
+		return player1;
 	}
 
-	public void setPlayer(Player player) {
-		this.player = player;
+	public void setPlayer1(Player player1) {
+		this.player1 = player1;
 	}
 
-	public abstract void createMap();
+	public Player getPlayer2() {
+		return player2;
+	}
+
+	public void setPlayer2(Player player2) {
+		this.player2 = player2;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	protected void createMap(int number) {
+		if (number == 1) {
+			createBar();
+			createChar(number);
+			createLoot();
+			createMons();
+		} else {
+			createBar();
+			createChar(number);
+			createLoot();
+			createMons();
+		}
+	}
+
+	public abstract void createBar();
+
+	public abstract void createChar(int number);
+
+	public abstract void createMons();
+
+	public abstract void createLoot();
 }
