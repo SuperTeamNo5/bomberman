@@ -5,14 +5,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import com.game.bomberman.model.Music;
 import com.game.bomberman.view.MainView;
 
 import DAO.ImageDAO;
@@ -29,7 +25,7 @@ public class MainViewController implements MouseListener, WindowListener {
 	OptionsController twoPlayersController;
 
 	public MainViewController() {
-//		waitController = new FrameWaitController();
+		waitController = new FrameWaitController();
 		musicDAO = new MusicDAO();
 		//run main song
 		mainView = new MainView();

@@ -241,5 +241,4 @@ public class ViewGame extends JPanel implements Runnable {
 	public void setLootView(List<Loot> loot) {
 		this.lootView = createLootView(loot);
 	}
-
 }

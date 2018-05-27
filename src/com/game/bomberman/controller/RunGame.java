@@ -76,5 +76,8 @@ public class RunGame {
 		game.setLocationRelativeTo(null);
 		game.addKeyListener(key);
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4465e707a0556d4b1851ce3ec7d39a8084bd77b6
 }
