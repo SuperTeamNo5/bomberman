@@ -3,6 +3,9 @@ package com.game.bomberman.controller;
 import java.awt.Rectangle;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 import com.game.bomberman.model.Barrier;
 import com.game.bomberman.model.Boom;
 import com.game.bomberman.model.Characters;
@@ -11,9 +14,10 @@ import com.game.bomberman.model.Map;
 import com.game.bomberman.model.Monster;
 import com.game.bomberman.model.Player;
 import com.game.bomberman.model.Position;
-import com.game.bomberman.view.ViewGame;
+import com.game.bomberman.singleton.MusicSingletonDAO;
+import com.game.bomberman.view.MainViewOfGame;
 
-import DAO.MusicDAO;
+import DAO.ImageDAO;
 
 // including methods action for game
 public class Action {
@@ -22,23 +26,24 @@ public class Action {
 	private List<Loot> loot;
 	private List<Monster> mons;
 	private Map map;
-	private ViewGame view;
-	MusicDAO musicDAO;
+	private MusicSingletonDAO musicDAO;
+	MainViewOfGame mainViewOfGame;
 
-	public MusicDAO getMusicDAO() {
+	public MusicSingletonDAO getMusicDAO() {
 		return musicDAO;
 	}
 
-	public void setMusicDAO(MusicDAO musicDAO) {
+	public void setMusicDAO(MusicSingletonDAO musicDAO) {
 		this.musicDAO = musicDAO;
 	}
 
-	public Action(Map map) {
+	public Action(Map map, MainViewOfGame mainViewOfGame) {
 		this.map = map;
 		this.player = map.getPlayer();
 		this.bar = map.getBar();
 		this.loot = map.getLoot();
 		this.mons = map.getMons();
+		this.mainViewOfGame = mainViewOfGame;
 	}
 
 	// test man dead
@@ -51,7 +56,6 @@ public class Action {
 		if (collisionPlayerAndBar() != null) {
 			player.getCharacter().setSpeedColumn(0);
 			player.getCharacter().setSpeedRow(0);
-			System.out.println("vao");
 			updateCharAfterCollision();
 			return;
 		}
@@ -64,6 +68,7 @@ public class Action {
 	}
 
 	// update char after collision
+	@SuppressWarnings("static-access")
 	public void updateCharAfterCollision() {
 		Rectangle rec1 = player.getCharacter().recPlayer();
 		Rectangle rec2 = collisionPlayerAndBar();
@@ -93,12 +98,11 @@ public class Action {
 	// test collision with bar
 	public Rectangle collisionPlayerAndBar() {
 		Rectangle rec1 = player.getCharacter().recPlayer();
-		Rectangle rec2, rec3;
+		Rectangle rec2;
 		for (int i = 0; i < bar.size(); i++) {
 			rec2 = new Rectangle(bar.get(i).getPosition().getxCoordinate(), bar.get(i).getPosition().getyCoordinate(),
 					bar.get(i).getWidth(), bar.get(i).getHeight() - 20);
 			if (player.getCharacter().collision(rec1, rec2)) {
-				// System.out.println("va cham");
 				return rec2;
 			}
 		}
@@ -110,16 +114,16 @@ public class Action {
 		Characters chara = player.getCharacter();
 		int x = chara.getPosition().getxCoordinate() + chara.getWidth() / 2;
 		int y = chara.getPosition().getyCoordinate() + chara.getHeight() / 2;
-		// int x = chara.getPosition().getxCoordinate();
-		// int y = chara.getPosition().getyCoordinate();
 		if (chara.getBag().search("bombItem").getQuatity() > 0) {
+			// drop bomb
 			musicDAO.getListSound().get(5).playSound(false);
 			Loot bomb = new Boom(new Position((x / 50) * 50, (y / 50) * 50));
 			loot.add(bomb);
 			setSizeBomb((Boom) bomb);
 			chara.getBag().search("bombItem").setQuatity(chara.getBag().search("bombItem").getQuatity() - 1);
+
 		}
-		// map.setLoot(loot);
+//		 map.setLoot(loot);
 
 	}
 
@@ -132,20 +136,20 @@ public class Action {
 			if (loot.get(i).getName().equalsIgnoreCase("bomb") || loot.get(i).getName().equalsIgnoreCase("bombang")) {
 				if (loot.get(i).getName().equalsIgnoreCase("bombang")) {
 					Boom bomb = (Boom) loot.get(i);
-					System.out.println("sizebom: " + bomb.getBombang_left() + bomb.getBombang_right()
-							+ bomb.getBombang_up() + bomb.getBombang_down());
 					bombangvsMonsVsBomberVsBar(bomb);
+
 				}
 			} else {
-				rec2 = new Rectangle(loot.get(i).getPositon().getxCoordinate() + 10,
-						loot.get(i).getPositon().getyCoordinate() + 10, 15, 15);
-				// System.out.println(player.getCharacter().collision(rec1,
-				// rec2));
+				rec2 = new Rectangle(loot.get(i).getPosition().getxCoordinate() + 10,
+						loot.get(i).getPosition().getyCoordinate() + 10, 15, 15);
 				if (player.getCharacter().collision(rec1, rec2)) {
-					// System.out.println("va cham vs loot");
-					musicDAO.getListSound().get(6).playSound(false);
+					// loot item
 					player.getCharacter().getBag().add(loot.get(i));
 					loot.remove(i);
+					// pick up items sound
+					musicDAO.getListSound().get(6).playSound(false);
+					// update quantity loot
+					RunGame.updateQuantityOfLoot();
 					map.setLoot(loot);
 					return loot;
 				}
@@ -161,12 +165,14 @@ public class Action {
 		for (int i = 0; i < mons.size(); i++) {
 			Monster mon = mons.get(i);
 			rec2 = new Rectangle(mon.getPosition().getxCoordinate(), mon.getPosition().getyCoordinate(), 45, 55);
-			if (player.getCharacter().collision(rec1, rec2)) {
-				musicDAO.getListSound().get(3).playSound(false);
+			if (player.getCharacter().collision(rec1, rec2)) {// player dies
 				player.getCharacter().dead();
-				// System.out.println("xxxxxxxxxxxx: " +
-				// player.getCharacter().isDead());
-
+				musicDAO.getListSound().get(3).playSound(false);
+				player.getCharacter().setHeart(player.getCharacter().getHeart() - 1);
+				RunGame.updateQuantityOfLoot();
+				if (player.getCharacter().getHeart() == 0) {
+					warning("Lose!", "Don't give up, Your mom believe you!", ImageDAO.avatarImage);
+				}
 			}
 		}
 	}
@@ -180,6 +186,8 @@ public class Action {
 				lo.setDeadLine(lo.getDeadLine() - 1);
 				if (lo.getDeadLine() <= 15) {
 					lo.setName("bombang");
+					// bomb bangs
+					musicDAO.getListSound().get(2).playSound(false);
 				}
 			} else {
 				if (loot.get(i).getName().equalsIgnoreCase("bombang")) {
@@ -189,6 +197,7 @@ public class Action {
 						chara.getBag().search("bombItem")
 								.setQuatity(chara.getBag().search("bombItem").getQuatity() + 1);
 					}
+					RunGame.updateQuantityOfLoot();
 				}
 			}
 		}
@@ -203,14 +212,15 @@ public class Action {
 	}
 
 	public void setSizebombangvsBox(Boom bomb) {
-		Rectangle rec_right = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(),
+
+		Rectangle rec_right = new Rectangle(bomb.getPosition().getxCoordinate(), bomb.getPosition().getyCoordinate(),
 				45 + 45 * bomb.getBombang_right(), 45);
-		Rectangle rec_left = new Rectangle(bomb.getPositon().getxCoordinate() - (45 * bomb.getBombang_left()),
-				bomb.getPositon().getyCoordinate(), 45 + 45 * bomb.getBombang_left(), 45);
-		Rectangle rec_down = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(), 45,
+		Rectangle rec_left = new Rectangle(bomb.getPosition().getxCoordinate() - (45 * bomb.getBombang_left()),
+				bomb.getPosition().getyCoordinate(), 45 + 45 * bomb.getBombang_left(), 45);
+		Rectangle rec_down = new Rectangle(bomb.getPosition().getxCoordinate(), bomb.getPosition().getyCoordinate(), 45,
 				45 + 45 * bomb.getBombang_down());
-		Rectangle rec_up = new Rectangle(bomb.getPositon().getxCoordinate(),
-				bomb.getPositon().getyCoordinate() - (45 * bomb.getBombang_up()), 45, 45 + 45 * bomb.getBombang_up());
+		Rectangle rec_up = new Rectangle(bomb.getPosition().getxCoordinate(),
+				bomb.getPosition().getyCoordinate() - (45 * bomb.getBombang_up()), 45, 45 + 45 * bomb.getBombang_up());
 		for (int i = 0; i < bar.size(); i++) {
 			Barrier barrier = bar.get(i);
 			Rectangle rec_Box = new Rectangle(barrier.getPosition().getxCoordinate(),
@@ -242,14 +252,17 @@ public class Action {
 		}
 	}
 
+	int playerDead = 0;
+
 	public void bombangvsMonsVsBomberVsBar(Boom bomb) {
-		Rectangle rec_right = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(),
+
+		Rectangle rec_right = new Rectangle(bomb.getPosition().getxCoordinate(), bomb.getPosition().getyCoordinate(),
 				45 + 45 * bomb.getBombang_right(), 45);
-		Rectangle rec_left = new Rectangle(bomb.getPositon().getxCoordinate() - 45, bomb.getPositon().getyCoordinate(),
-				45 + 45 * bomb.getBombang_left(), 45);
-		Rectangle rec_down = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate(), 45,
+		Rectangle rec_left = new Rectangle(bomb.getPosition().getxCoordinate() - 45,
+				bomb.getPosition().getyCoordinate(), 45 + 45 * bomb.getBombang_left(), 45);
+		Rectangle rec_down = new Rectangle(bomb.getPosition().getxCoordinate(), bomb.getPosition().getyCoordinate(), 45,
 				45 + 45 * bomb.getBombang_down());
-		Rectangle rec_up = new Rectangle(bomb.getPositon().getxCoordinate(), bomb.getPositon().getyCoordinate() - 45,
+		Rectangle rec_up = new Rectangle(bomb.getPosition().getxCoordinate(), bomb.getPosition().getyCoordinate() - 45,
 				45, 45 + 45 * bomb.getBombang_up());
 		for (int i = 0; i < mons.size(); i++) {
 			Monster mon = mons.get(i);
@@ -258,7 +271,11 @@ public class Action {
 			if (rec_Mons.intersects(rec_up) || rec_Mons.intersects(rec_down) || rec_Mons.intersects(rec_left)
 					|| rec_Mons.intersects(rec_right)) {
 				mons.remove(i);
-				player.setScore(player.getScore() + 10);
+				// monster dies
+				musicDAO.getListSound().get(4).playSound(false);
+				player.setScore(player.getScore() + 100);
+				// update player's score
+				RunGame.updateQuantityOfLoot();
 			}
 		}
 		for (int i = 0; i < bar.size(); i++) {
@@ -278,7 +295,27 @@ public class Action {
 		if (rec_Char.intersects(rec_up) || rec_Char.intersects(rec_down) || rec_Char.intersects(rec_left)
 				|| rec_Char.intersects(rec_right)) {
 			characters.setCollisionVsBomb(true);
+			if (playerDead == 0) {// player died
+				// if player's heart equal zero
+				if (player.getCharacter().getHeart() == 0) {
+					warning("Lose!", "Don't give up, your mom believe you!", ImageDAO.avatarImage);
+				} else {
+					//heart
+					characters.setHeart(characters.getHeart() - 1);
+					musicDAO.getListSound().get(3).playSound(false);
+					playerDead++;
+//					RunGame.updateQuantityOfLoot();
+
+				}
+			}
 		}
+	}
+
+	public void warning(String title, String content, String image) {
+		String[] buttons = { "Okay" };
+		ImageIcon icon = new ImageIcon((getClass().getResource(image)));
+
+		JOptionPane.showOptionDialog(null, content, title, JOptionPane.INFORMATION_MESSAGE, 0, icon, buttons, null);
 	}
 
 	public List<Barrier> getBar() {

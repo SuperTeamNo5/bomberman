@@ -11,7 +11,7 @@ import DAO.ImageDAO;
 @SuppressWarnings("serial")
 public class MenuView extends JMenuBar {
 	private JMenu mnuFile, mnuIfor, mnuHelp;
-	private JMenuItem mniExit, mniLoad, mniInforAuthor,mniHelp;
+	private JMenuItem mniExit, mniLoad, mniSave, mniInforAuthor,mniHelp,mniBack;
 
 	public MenuView() {
 		setMenuBar();
@@ -22,10 +22,20 @@ public class MenuView extends JMenuBar {
 		mnuFile = new JMenu("File");
 		mnuFile.setIcon(new ImageIcon(getClass().getResource(ImageDAO.fileIcon)));
 		// mnuFile.setMnemonic(KeyEvent.VK_F);
+		
+		mniBack = new JMenuItem("Back");
+		mniBack.setIcon(new ImageIcon(getClass().getResource(ImageDAO.backsIcon)));
+		mniBack.setEnabled(false);
+		mnuFile.add(mniBack);
 
 		mniLoad = new JMenuItem("Load game");
 		mniLoad.setIcon(new ImageIcon(getClass().getResource(ImageDAO.loadIcon)));
 		mnuFile.add(mniLoad);
+		
+		mniSave = new JMenuItem("Save game");
+		mniSave.setIcon(new ImageIcon(getClass().getResource(ImageDAO.saveIcon)));
+		mniSave.setEnabled(false);
+		mnuFile.add(mniSave);
 
 		mniExit = new JMenuItem("Exit");
 		mniExit.add(new JSeparator());
@@ -89,13 +99,13 @@ public class MenuView extends JMenuBar {
 		this.mniExit = mniExit;
 	}
 
-//	public JMenuItem getMniSave() {
-//		return mniSave;
-//	}
-//
-//	public void setMniSave(JMenuItem mniSave) {
-//		this.mniSave = mniSave;
-//	}
+	public JMenuItem getMniSave() {
+		return mniSave;
+	}
+
+	public void setMniSave(JMenuItem mniSave) {
+		this.mniSave = mniSave;
+	}
 
 	public JMenuItem getMniLoad() {
 		return mniLoad;
@@ -118,6 +128,14 @@ public class MenuView extends JMenuBar {
 
 	public void setMniHelp(JMenuItem mniHelp) {
 		this.mniHelp = mniHelp;
+	}
+
+	public JMenuItem getMniBack() {
+		return mniBack;
+	}
+
+	public void setMniBack(JMenuItem mniBack) {
+		this.mniBack = mniBack;
 	}
 	
 }

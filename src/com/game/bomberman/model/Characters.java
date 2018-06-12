@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 
 public class Characters implements Move {
 	private String name;
+	private int heart = 3;
 	private String directional;
 	private Position position;
 	private Bag bag;
@@ -13,9 +14,11 @@ public class Characters implements Move {
 	private boolean dead;
 	private boolean collisionVsBomb;
 
-	public Characters(String name, String directional, Position position, Bag bag, int speedRow, int speedColumn) {
+	public Characters(String name, int heart, String directional, Position position, Bag bag, int speedRow,
+			int speedColumn) {
 		super();
 		this.name = name;
+		this.heart = heart;
 		this.directional = directional;
 		this.position = position;
 		this.bag = bag;
@@ -86,7 +89,7 @@ public class Characters implements Move {
 		Loot loot;
 		loot = new Boom("bombItem", 1);
 		getBag().add(loot);
-		loot = new Shoes("shoes", 2);
+		loot = new Shoes("shoes", 1);
 		getBag().add(loot);
 		loot = new Soda("soda", 2);
 		getBag().add(loot);
@@ -146,5 +149,13 @@ public class Characters implements Move {
 
 	public void setCollisionVsBomb(boolean collisionVsBomb) {
 		this.collisionVsBomb = collisionVsBomb;
+	}
+
+	public int getHeart() {
+		return heart;
+	}
+
+	public void setHeart(int heart) {
+		this.heart = heart;
 	}
 }

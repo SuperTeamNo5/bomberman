@@ -37,11 +37,11 @@ public abstract class Loot {
 		this.name = name;
 	}
 
-	public Position getPositon() {
+	public Position getPosition() {
 		return positon;
 	}
 
-	public void setPositon(Position positon) {
+	public void setPosition(Position positon) {
 		this.positon = positon;
 	}
 

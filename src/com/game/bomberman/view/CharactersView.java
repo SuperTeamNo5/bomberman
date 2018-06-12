@@ -40,22 +40,33 @@ public class CharactersView extends JPanel {
 			return;
 		}
 		switch (name) {
-		case "bongmo":
+		case "Kho Kho":
 			try {
-				bongMo(g);
+				khokho(g);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
+		case "LittBoy":
+			try {
+				littboy(g);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
 
 		default:
-
+			try {
+				khokho(g);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			break;
 		}
 	}
 
-	public void bongMo(Graphics g) throws IOException {
+	public void khokho(Graphics g) throws IOException {
 		if (characters.isCollisionVsBomb()) {
 			img = new ImageIcon(getClass().getResource(ImageDAO.bomber_Dead)).getImage();
 			g.drawImage(img, characters.getPosition().getxCoordinate(), characters.getPosition().getyCoordinate(), 50,
@@ -79,6 +90,35 @@ public class CharactersView extends JPanel {
 		}
 		if (characters.getDirectional().equalsIgnoreCase("right")) {
 			img = new ImageIcon(getClass().getResource(ImageDAO.bomber_right)).getImage();
+			g.drawImage(img, characters.getPosition().getxCoordinate(), characters.getPosition().getyCoordinate(),
+					characters.getWidth(), characters.getHeight(), null);
+		}
+	}
+
+	public void littboy(Graphics g) throws IOException {
+		if (characters.isCollisionVsBomb()) {
+			img = new ImageIcon(getClass().getResource(ImageDAO.LITTBOY_DEAD)).getImage();
+			g.drawImage(img, characters.getPosition().getxCoordinate(), characters.getPosition().getyCoordinate(), 50,
+					60, null);
+			return;
+		}
+		if (characters.getDirectional().equalsIgnoreCase("down")) {
+			img = new ImageIcon(getClass().getResource(ImageDAO.LITTBOY_DOWN)).getImage();
+			g.drawImage(img, characters.getPosition().getxCoordinate(), characters.getPosition().getyCoordinate(),
+					characters.getWidth(), characters.getHeight(), null);
+		}
+		if (characters.getDirectional().equalsIgnoreCase("up")) {
+			img = new ImageIcon(getClass().getResource(ImageDAO.LITTBOY_UP)).getImage();
+			g.drawImage(img, characters.getPosition().getxCoordinate(), characters.getPosition().getyCoordinate(),
+					characters.getWidth(), characters.getHeight(), null);
+		}
+		if (characters.getDirectional().equalsIgnoreCase("left")) {
+			img = new ImageIcon(getClass().getResource(ImageDAO.LITTBOY_LEFT)).getImage();
+			g.drawImage(img, characters.getPosition().getxCoordinate(), characters.getPosition().getyCoordinate(),
+					characters.getWidth(), characters.getHeight(), null);
+		}
+		if (characters.getDirectional().equalsIgnoreCase("right")) {
+			img = new ImageIcon(getClass().getResource(ImageDAO.LITTBOY_RIGHT)).getImage();
 			g.drawImage(img, characters.getPosition().getxCoordinate(), characters.getPosition().getyCoordinate(),
 					characters.getWidth(), characters.getHeight(), null);
 		}

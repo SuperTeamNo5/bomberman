@@ -12,10 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.game.bomberman.singleton.MusicSingletonDAO;
 import com.game.bomberman.view.OptionPanel;
 
 import DAO.ImageDAO;
-import DAO.MusicDAO;
 
 public class OptionsController implements MouseListener {
 	static int counta, countb;
@@ -25,9 +25,9 @@ public class OptionsController implements MouseListener {
 	JFrame frame;
 	JPanel pnlView;
 	MainViewController mainViewController;
-	MusicDAO musicDAO;
+	MusicSingletonDAO musicDAO;
 
-	public OptionsController(JFrame frame, MainViewController mainViewController, MusicDAO musicDAO) {
+	public OptionsController(JFrame frame, MainViewController mainViewController, MusicSingletonDAO musicDAO) {
 		this.frame = frame;
 		this.mainViewController = mainViewController;
 		this.musicDAO = musicDAO;

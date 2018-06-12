@@ -21,7 +21,7 @@ public class MainViewPanel extends JPanel {
 		add(getButtonHighScore());
 		add(getButtonOption());
 		add(getButtonQuit());
-		add(getWelcomeAnimation());
+//		add(getWelcomeAnimation());
 		add(getAvatarAnimation());
 		setVisible(true);
 		setLayout(new BorderLayout());

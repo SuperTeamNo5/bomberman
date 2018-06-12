@@ -1,8 +1,6 @@
 package com.game.bomberman.model;
 
 import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Monster {
 	protected String name;

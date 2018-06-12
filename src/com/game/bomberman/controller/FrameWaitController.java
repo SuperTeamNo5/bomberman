@@ -50,6 +50,7 @@ public class FrameWaitController {
 		loaderFrame.setVisible(true);
 		try {
 			// waitViewController.playSound();
+			
 			Thread.sleep(randomRange(2000, 3000));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -58,9 +59,4 @@ public class FrameWaitController {
 		 loaderFrame.setVisible(false);
 //		System.exit(0);
 	}
-
-	public static void main(String[] args) {
-		new FrameWaitController();
-	}
-
 }

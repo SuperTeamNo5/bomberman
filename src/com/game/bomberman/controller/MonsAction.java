@@ -76,8 +76,8 @@ public class MonsAction {
 			rec2 = new Rectangle(bar.get(i).getPosition().getxCoordinate(), bar.get(i).getPosition().getyCoordinate(),
 					bar.get(i).getWidth(), bar.get(i).getHeight() - 30);
 			if (i < loot.size() && loot.get(i).getName().equalsIgnoreCase("bomb")) {
-				rec3 = new Rectangle(loot.get(i).getPositon().getxCoordinate() + 10,
-						loot.get(i).getPositon().getyCoordinate() + 10, 30, 30);
+				rec3 = new Rectangle(loot.get(i).getPosition().getxCoordinate() + 10,
+						loot.get(i).getPosition().getyCoordinate() + 10, 30, 30);
 				if (rec1.intersects(rec3)) {
 					return rec3;
 				}

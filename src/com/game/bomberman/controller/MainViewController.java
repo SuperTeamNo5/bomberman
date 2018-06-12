@@ -9,35 +9,37 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import com.game.bomberman.singleton.MusicSingletonDAO;
 import com.game.bomberman.view.MainView;
 
 import DAO.ImageDAO;
-import DAO.MusicDAO;
 
 public class MainViewController implements MouseListener, WindowListener {
 
 	FrameWaitController waitController;
-	MusicDAO musicDAO;
-	MainView mainView;
-	MenuViewController menuViewController;
+	static MusicSingletonDAO musicDAO;
+	static MainView mainView;
+	static MenuViewController menuViewController;
 	PanelHighScoreController highScoreController;
 	OnePlayerController onePlayerController;
-	OptionsController twoPlayersController;
+	TwoPlayerController twoPlayerController;
+	OptionsController optionsController;
 
-	public MainViewController() {
-		waitController = new FrameWaitController();
-		musicDAO = new MusicDAO();
-		//run main song
-		mainView = new MainView();
+	@SuppressWarnings("static-access")
+	public MainViewController(FrameWaitController waitController,MusicSingletonDAO musicDAO,MainView mainView) {
+		this.waitController = waitController;
+		this.musicDAO = musicDAO;
+		// run main song
+		this.mainView = mainView;
 		musicDAO.getListMusic().get(0).playSound(true);
-		highScoreController = new PanelHighScoreController(mainView, this,musicDAO);
-		onePlayerController = new OnePlayerController(mainView, this,musicDAO);
-		twoPlayersController = new OptionsController(mainView, this,musicDAO);
+		highScoreController = new PanelHighScoreController(mainView, this, musicDAO);
+		onePlayerController = new OnePlayerController(mainView, this, musicDAO);
+		twoPlayerController = new TwoPlayerController(mainView, this, musicDAO);
+		optionsController = new OptionsController(mainView, this, musicDAO);
 		setEventProcessing();
-		menuViewController = new MenuViewController(mainView.getMenubar(), this,musicDAO);
+		menuViewController = new MenuViewController(mainView.getMenubar(), this, musicDAO);
 
 	}
-	
 
 	// Method is use to close the game's window
 	public void closing() {
@@ -80,6 +82,8 @@ public class MainViewController implements MouseListener, WindowListener {
 			onePlayerController.setUpView();
 
 		} else if (e.getSource() == mainView.getPnlView().getLblPlayer2()) {
+			setMainView(false);
+			twoPlayerController.setUpView();
 
 		} else if (e.getSource() == mainView.getPnlView().getLblHighScore()) {
 			setMainView(false);
@@ -87,7 +91,7 @@ public class MainViewController implements MouseListener, WindowListener {
 
 		} else if (e.getSource() == mainView.getPnlView().getLblOption()) {
 			setMainView(false);
-			twoPlayersController.setUpView();
+			optionsController.setUpView();
 
 		} else if (e.getSource() == mainView.getPnlView().getLblQuit()) {
 			closing();
@@ -181,10 +185,6 @@ public class MainViewController implements MouseListener, WindowListener {
 	@Override
 	public void windowOpened(WindowEvent e) {
 
-	}
-
-	public static void main(String[] args) {
-		new MainViewController();
 	}
 
 }

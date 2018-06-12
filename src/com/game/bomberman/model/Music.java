@@ -9,10 +9,10 @@ public class Music {
 	private String name;
 	private String path;
 	private AudioInputStream audioIn;
-	private Clip clip;
+	public Clip clip;
 	private boolean openation = true;
 	private float volume = 0f;
-	private FloatControl control ;
+	private FloatControl control;
 
 	public Music(String name, String path) {
 		super();
@@ -43,6 +43,11 @@ public class Music {
 			}
 		}
 
+	}
+
+	// This method check sound on
+	public boolean checkPlaySound() {
+		return clip.isOpen();
 	}
 
 	// This method stop the sound

@@ -58,7 +58,7 @@ public class ViewGame extends JPanel implements Runnable {
 		displayMonsterView(g);
 		dislayViewMan(g);
 		displayBarrierViewUp(g);
-		System.out.println("Tgian: " + ((System.nanoTime() - begintime) / 1000000));
+//		System.out.println("Tgian: " + ((System.nanoTime() - begintime) / 1000000));
 	}
 
 	// display backround
@@ -218,5 +218,13 @@ public class ViewGame extends JPanel implements Runnable {
 
 	public void setLootView(List<Loot> loot) {
 		this.lootView = createLootView(loot);
+	}
+
+	public Map getMap() {
+		return map;
+	}
+
+	public void setMap(Map map) {
+		this.map = map;
 	}
 }

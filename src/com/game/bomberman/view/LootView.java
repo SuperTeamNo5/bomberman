@@ -32,39 +32,39 @@ public class LootView extends JPanel {
 		switch (name) {
 		case "bombItem":
 			img = new ImageIcon(getClass().getResource(ImageDAO.bomb_item)).getImage();
-			g.drawImage(img, loot.getPositon().getxCoordinate(), loot.getPositon().getyCoordinate(), null);
+			g.drawImage(img, loot.getPosition().getxCoordinate(), loot.getPosition().getyCoordinate(), null);
 
 			break;
 		case "bomb":
 			img = new ImageIcon(getClass().getResource(ImageDAO.bomb)).getImage();
-			g.drawImage(img, loot.getPositon().getxCoordinate(), loot.getPositon().getyCoordinate(), null);
+			g.drawImage(img, loot.getPosition().getxCoordinate(), loot.getPosition().getyCoordinate(), null);
 
 			break;
 		case "bombang":
 			Boom bombang = (Boom) loot;
 			img = new ImageIcon(getClass().getResource(ImageDAO.bombang_down)).getImage();
-			g.drawImage(img, loot.getPositon().getxCoordinate(), loot.getPositon().getyCoordinate(), 45,
+			g.drawImage(img, loot.getPosition().getxCoordinate(), loot.getPosition().getyCoordinate(), 45,
 					(45) + 45 * bombang.getBombang_down(), null);
 			img = new ImageIcon(getClass().getResource(ImageDAO.bombang_up)).getImage();
-			g.drawImage(img, loot.getPositon().getxCoordinate(),
-					loot.getPositon().getyCoordinate() - (45 * bombang.getBombang_up()), 45,
+			g.drawImage(img, loot.getPosition().getxCoordinate(),
+					loot.getPosition().getyCoordinate() - (45 * bombang.getBombang_up()), 45,
 					45 + 45 * bombang.getBombang_up(), null);
 			img = new ImageIcon(getClass().getResource(ImageDAO.bombang_right)).getImage();
 //			System.out.println("/////////////////////"+bombang.getBombang_right());
-			g.drawImage(img, loot.getPositon().getxCoordinate(), loot.getPositon().getyCoordinate(),
+			g.drawImage(img, loot.getPosition().getxCoordinate(), loot.getPosition().getyCoordinate(),
 					45 + 45 * bombang.getBombang_right(), 45, null);
 			img = new ImageIcon(getClass().getResource(ImageDAO.bombang_left)).getImage();
-			g.drawImage(img, loot.getPositon().getxCoordinate() - (45 * bombang.getBombang_left()),
-					loot.getPositon().getyCoordinate(), 45 + 45 * bombang.getBombang_left(), 45, null);
+			g.drawImage(img, loot.getPosition().getxCoordinate() - (45 * bombang.getBombang_left()),
+					loot.getPosition().getyCoordinate(), 45 + 45 * bombang.getBombang_left(), 45, null);
 
 			break;
 		case "shoes":
 			img = new ImageIcon(getClass().getResource(ImageDAO.shoes)).getImage();
-			g.drawImage(img, loot.getPositon().getxCoordinate(), loot.getPositon().getyCoordinate(), null);
+			g.drawImage(img, loot.getPosition().getxCoordinate(), loot.getPosition().getyCoordinate(), null);
 			break;
 		case "soda":
 			img = new ImageIcon(getClass().getResource(ImageDAO.soda)).getImage();
-			g.drawImage(img, loot.getPositon().getxCoordinate(), loot.getPositon().getyCoordinate(), null);
+			g.drawImage(img, loot.getPosition().getxCoordinate(), loot.getPosition().getyCoordinate(), null);
 
 			break;
 		default:

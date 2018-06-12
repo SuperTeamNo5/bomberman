@@ -39,28 +39,19 @@ public class MapLv1 extends Map {
 			}
 		}
 		// create position of player
-		// Player a = new Player("Han", 0, new Characters("bongmo", "down", new
-		// Position(0, 587), new Bag(), 1));
 		getPlayer().getCharacter().setPosition(new Position(0, 595));
-		// Player z = new Player(new Position(0, 587));
-		// if (soNguoiChoi == 1) {
-		// man.add(a);
-		// } else {
-		// man.add(a);
-		// man.add(z);
-		// }
 		// create position of loot
 		Loot boom1 = new Boom("bombItem", new Position(50, 150));
-		Loot boom3 = new Shoes("shoes", new Position(0, 200));
 		Loot boom2 = new Soda("soda", new Position(50, 250));
+		Loot boom3 = new Shoes("shoes", new Position(0, 200));
 		loot.add(boom1);
 		loot.add(boom2);
 		loot.add(boom3);
 
 		// create position of monster
-		Monster monster3 = new NomalMonster("nomalMonster", new Position(100, 487));
 		Monster monster1 = new NomalMonster("nomalMonster", new Position(0, 87));
 		Monster monster2 = new NomalMonster("nomalMonster", new Position(187, 187));
+		Monster monster3 = new NomalMonster("nomalMonster", new Position(100, 487));
 		Monster monster4 = new NomalMonster("nomalMonster", new Position(450, 387));
 		Monster monster5 = new NomalMonster("nomalMonster", new Position(600, -13));
 		Monster monster6 = new NomalMonster("nomalMonster", new Position(800, 287));

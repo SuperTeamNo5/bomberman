@@ -16,7 +16,6 @@ public class KeyBoard implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -46,7 +45,6 @@ public class KeyBoard implements KeyListener {
 			break;
 		case KeyEvent.VK_SPACE:
 			act.dropBomb();
-			System.out.println("dropbom");
 			break;
 
 		default:

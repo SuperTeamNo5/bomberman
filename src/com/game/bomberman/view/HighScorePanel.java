@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -22,10 +23,11 @@ import DAO.ImageDAO;
 public class HighScorePanel extends JPanel {
 	private JPanel pnlHighScore, pnlView, pnlBtnBack;
 	private JLabel lblNumber, lblName, lblScore, lblBtnBack, lblTitle;
-	private BufferedImage imgIconBack;
+	private BufferedImage imgIconBack, img1;
+	Image newLoaderImage;
 
 	public HighScorePanel() {
-//		add(pnlView());
+		// add(pnlView());
 	}
 
 	/*
@@ -37,12 +39,15 @@ public class HighScorePanel extends JPanel {
 		pnlView = new JPanel(new BorderLayout());
 		pnlHighScore = new JPanel(new GridLayout(10, 3));
 		pnlBtnBack = new JPanel(new FlowLayout());
-		lblTitle = new JLabel("HIGH SCORE", SwingConstants.CENTER);
+		lblTitle = new JLabel("", SwingConstants.CENTER);
 		lblTitle.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		lblTitle.setForeground(Color.decode("#ff3333"));
 
 		lblBtnBack = new JLabel();
 		try {
+			img1 = ImageIO.read(getClass().getResource(ImageDAO.HIGHSCORE_IMAGE));
+			newLoaderImage = img1.getScaledInstance(250, 50, java.awt.Image.SCALE_SMOOTH);
+			lblTitle.setIcon(new ImageIcon(newLoaderImage));
 			imgIconBack = ImageIO.read(getClass().getResource(ImageDAO.backIcon));
 			lblBtnBack.setIcon(new ImageIcon(imgIconBack));
 		} catch (IOException e) {
@@ -53,7 +58,7 @@ public class HighScorePanel extends JPanel {
 		pnlView.add(pnlHighScore, BorderLayout.CENTER);
 		pnlView.add(pnlBtnBack, BorderLayout.SOUTH);
 
-		pnlHighScore.setBackground(new Color(90, 90, 90, 150));
+		pnlHighScore.setBackground(new Color(90, 90, 90, 50));
 		pnlBtnBack.setOpaque(false);
 		pnlView.setBackground(new Color(255, 255, 255, 10));
 		pnlView.setBounds(75, 60, 630, 450);
@@ -100,6 +105,5 @@ public class HighScorePanel extends JPanel {
 	public void setPnlHighScore(JPanel pnlHighScore) {
 		this.pnlHighScore = pnlHighScore;
 	}
-	
 
 }
