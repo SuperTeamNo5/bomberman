@@ -96,6 +96,7 @@ public class OnePlayerController implements MouseListener {
 			mainViewController.setMainView(true);
 			frame.repaint();
 		} else if (e.getSource() == playerPanel.getLblBtnGo()) {
+<<<<<<< HEAD
 			if (playerPanel.getTxtName().getText().equals("") || playerPanel.getTxtName().getText().equals(null)) {
 				warning("Fill infomation", "Hey, fill your name plz!", ImageDAO.avatarImage);
 			} else if (playerPanel.getTxtName().getText().length() > 13) {
@@ -109,6 +110,14 @@ public class OnePlayerController implements MouseListener {
 				MainViewController.menuViewController.menuView.getMniSave().setEnabled(true);
 				MainViewController.menuViewController.menuView.getMniBack().setEnabled(true);
 			}
+=======
+			musicDAO.getListMusic().get(0).stopSound();
+			musicDAO.getListMusic().get(1).playSound(true);
+			frame.setVisible(false);
+			String name = playerPanel.getTxtName().getText();
+			gameView = new RunGame("han","shika", musicDAO);
+			System.out.println("Ten nv: "+name);
+>>>>>>> 5cc0dd67bbf0af59816c426aa654996b8b3b126d
 			// frame.repaint();
 		} else if (e.getSource() == playerPanel.getLblBtnPrevious()) {
 			displayPrevious();

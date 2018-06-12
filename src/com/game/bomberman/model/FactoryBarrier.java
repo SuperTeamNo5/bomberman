@@ -1,12 +1,13 @@
 package com.game.bomberman.model;
 
-public class FactoryBarrier {
+public class FactoryBarrier extends CreateCentre {
 	private Barrier bar;
 
 	public FactoryBarrier() {
 	}
 
 	// apply factory pattern
+	@Override
 	public Barrier createBarrier(String name, Position position) {
 		switch (name) {
 		case "wall":

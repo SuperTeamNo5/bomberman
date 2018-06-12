@@ -3,6 +3,7 @@ package com.game.bomberman.model;
 public class Boom extends Loot {
 	private int deadLine;
 	private int bombang_left, bombang_right, bombang_up, bombang_down;
+	private String bombOf;
 
 	public Boom(String name, int quatity) {// use for bag
 		super(name, quatity);
@@ -12,10 +13,11 @@ public class Boom extends Loot {
 		super(name, positon);
 	}
 
-	public Boom(Position positon) {// use for bomb
+	public Boom(Position positon, String bombOf) {// use for bomb
 		super(positon);
 		this.name = "bomb";
-		this.deadLine = 200;
+		this.deadLine = 450;
+		this.bombOf = bombOf;
 		this.bombang_down = 1;
 		this.bombang_left = 1;
 		this.bombang_right = 1;
@@ -60,6 +62,14 @@ public class Boom extends Loot {
 
 	public void setBombang_down(int bombang_down) {
 		this.bombang_down = bombang_down;
+	}
+
+	public String getBombOf() {
+		return bombOf;
+	}
+
+	public void setBombOf(String bombOf) {
+		this.bombOf = bombOf;
 	}
 
 }

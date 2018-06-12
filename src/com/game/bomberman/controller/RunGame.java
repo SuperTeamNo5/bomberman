@@ -1,5 +1,6 @@
 package com.game.bomberman.controller;
 
+<<<<<<< HEAD
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -12,6 +13,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+=======
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> 5cc0dd67bbf0af59816c426aa654996b8b3b126d
 
 import com.game.bomberman.model.Bag;
 import com.game.bomberman.model.Barrier;
@@ -43,6 +48,7 @@ public class RunGame {
 	static MainViewController mainViewController;
 	private static Characters character;
 
+<<<<<<< HEAD
 	@SuppressWarnings("static-access")
 	public RunGame(MainViewController mainViewController, String namePlayer, String nameCharacter) {
 		this.mainViewController = mainViewController;
@@ -71,6 +77,10 @@ public class RunGame {
 		// update loot
 		updateQuantityOfLoot();
 	}
+=======
+	public RunGame(String name, MusicDAO musicDAO) {
+		Player player = new Player(name, 0, new Characters("bongmo", "down", new Position(0, 0), new Bag(), 0, 0));
+>>>>>>> 5cc0dd67bbf0af59816c426aa654996b8b3b126d
 
 	static public void closeGame() {
 		viewGame.setVisible(false);
@@ -100,6 +110,7 @@ public class RunGame {
 		// load game from file
 	}
 
+<<<<<<< HEAD
 	static public void saveGame(File file) {
 		try {
 			PrintWriter pw = null;
@@ -269,6 +280,56 @@ public class RunGame {
 			player.getCharacter().getBag().getLootList().get(2).setQuatity(1);
 		}
 	}
+=======
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+
+		Action act = new Action(map,map.getPlayer1());
+		act.setMusicDAO(musicDAO);
+		MonsAction monsAct = new MonsAction(map);
+
+		List<Action> actList = new ArrayList<>();
+		actList.add(act);
+		ViewGame view = new ViewGame(map, actList, monsAct);
+
+		KeyBoard key = new KeyBoard(map.getPlayer1().getCharacter(), actList);
+
+		MainViewOfGame game = new MainViewOfGame(view);
+		game.startGame();
+		game.setVisible(true);
+		game.setLocationRelativeTo(null);
+		game.addKeyListener(key);
+	}
+
+	public RunGame(String name1, String name2, MusicDAO musicDAO) {
+		Player player1 = new Player(name1, 0, new Characters("bongmo", "down", new Position(0, 0), new Bag(), 0, 0));
+		Player player2 = new Player(name2, 0, new Characters("bongmo", "down", new Position(0, 0), new Bag(), 0, 0));
+
+		Map map = new MapLv1(player1, player2);
+
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		// map.getBar().remove(1);
+		List<Action> actList = new ArrayList<>();
+		Action act = new Action(map, map.getPlayer1());
+		Action act1 = new Action(map, map.getPlayer2());
+		act.setMusicDAO(musicDAO);
+		act1.setMusicDAO(musicDAO);
+		actList.add(act);
+		actList.add(act1);
+		MonsAction monsAct = new MonsAction(map);
+
+		ViewGame view = new ViewGame(map, actList, monsAct);
+
+		KeyBoard key = new KeyBoard(map.getPlayer1().getCharacter(),map.getPlayer2().getCharacter(), actList);
+>>>>>>> 5cc0dd67bbf0af59816c426aa654996b8b3b126d
 
 	// update quantity of loot, even include player' life
 	public static void updateQuantityOfLoot() {
@@ -276,4 +337,8 @@ public class RunGame {
 				bag.getLootList().get(0).getQuatity(), bag.getLootList().get(2).getQuatity(),
 				bag.getLootList().get(1).getQuatity());
 	}
+<<<<<<< HEAD
+
+=======
+>>>>>>> 4465e707a0556d4b1851ce3ec7d39a8084bd77b6
 }

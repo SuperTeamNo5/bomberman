@@ -43,6 +43,7 @@ public class LootView extends JPanel {
 		case "bombang":
 			Boom bombang = (Boom) loot;
 			img = new ImageIcon(getClass().getResource(ImageDAO.bombang_down)).getImage();
+<<<<<<< HEAD
 			g.drawImage(img, loot.getPosition().getxCoordinate(), loot.getPosition().getyCoordinate(), 45,
 					(45) + 45 * bombang.getBombang_down(), null);
 			img = new ImageIcon(getClass().getResource(ImageDAO.bombang_up)).getImage();
@@ -56,6 +57,21 @@ public class LootView extends JPanel {
 			img = new ImageIcon(getClass().getResource(ImageDAO.bombang_left)).getImage();
 			g.drawImage(img, loot.getPosition().getxCoordinate() - (45 * bombang.getBombang_left()),
 					loot.getPosition().getyCoordinate(), 45 + 45 * bombang.getBombang_left(), 45, null);
+=======
+			g.drawImage(img, loot.getPositon().getxCoordinate(), loot.getPositon().getyCoordinate(), 45,
+					45 + (45 * bombang.getBombang_down()), null);
+			img = new ImageIcon(getClass().getResource(ImageDAO.bombang_up)).getImage();
+			g.drawImage(img, loot.getPositon().getxCoordinate(),
+					loot.getPositon().getyCoordinate() - (45 * bombang.getBombang_up()), 45,
+					45 + (45 * bombang.getBombang_up()), null);
+			img = new ImageIcon(getClass().getResource(ImageDAO.bombang_right)).getImage();
+			// System.out.println("/////////////////////"+bombang.getBombang_right());
+			g.drawImage(img, loot.getPositon().getxCoordinate(), loot.getPositon().getyCoordinate(),
+					45 + (45 * bombang.getBombang_right()), 45, null);
+			img = new ImageIcon(getClass().getResource(ImageDAO.bombang_left)).getImage();
+			g.drawImage(img, loot.getPositon().getxCoordinate() - (45 * bombang.getBombang_left()),
+					loot.getPositon().getyCoordinate(), 45 + (45 * bombang.getBombang_left()), 45, null);
+>>>>>>> 5cc0dd67bbf0af59816c426aa654996b8b3b126d
 
 			break;
 		case "shoes":
